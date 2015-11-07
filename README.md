@@ -1,6 +1,6 @@
-#CMU Java for Smartphone Development Team Project
+CMU Java for Smartphone Development Team Project
 
-#Motivation
+##Motivation
 We love food! Who doesn't?
 
 ## API Reference
