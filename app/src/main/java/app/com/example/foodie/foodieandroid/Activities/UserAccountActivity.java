@@ -1,4 +1,4 @@
-package app.com.example.foodie.foodieandroid;
+package app.com.example.foodie.foodieandroid.Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import app.com.example.foodie.foodieandroid.R;
 
 public class UserAccountActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
