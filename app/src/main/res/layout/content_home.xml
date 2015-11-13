@@ -13,7 +13,6 @@
     tools:showIn="@layout/activity_home"
     tools:context="app.com.example.foodie.foodieandroid.Activities.HomeActivity">
 
-
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
@@ -25,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="16dp">
+        android:paddingTop="6dp">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -35,6 +34,7 @@
             <ImageView
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                android:id="@+id/chef_list"
                 android:adjustViewBounds="true"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/contentchef" />
@@ -61,9 +61,6 @@
 
         </RelativeLayout>
 
-
-
-
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -80,6 +77,7 @@
                     android:layout_height="75dp"
                     android:adjustViewBounds="true"
                     android:layout_centerHorizontal="true"
+                    android:id="@+id/dish_list"
                     android:src="@drawable/contentdish" />
 
                 <TextView
@@ -103,19 +101,13 @@
                     android:textColor="@color/colorSecondaryText"/>
 
             </RelativeLayout>
-
-
         </LinearLayout>
-
-
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="16dp">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -127,6 +119,7 @@
                 android:layout_height="75dp"
                 android:adjustViewBounds="true"
                 android:layout_centerHorizontal="true"
+                android:id="@+id/categories"
                 android:src="@drawable/contentmenu" />
 
             <TextView
@@ -151,9 +144,6 @@
 
         </RelativeLayout>
 
-
-
-
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -170,6 +160,7 @@
                     android:layout_height="75dp"
                     android:adjustViewBounds="true"
                     android:layout_centerHorizontal="true"
+                    android:id="@+id/location_map"
                     android:src="@drawable/contentlocation" />
 
                 <TextView
