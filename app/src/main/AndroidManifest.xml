@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,22 +30,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activities.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".ChefActivity"
+            android:name=".Activities.ChefActivity"
             android:label="@string/title_activity_chef"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".DishMenuActivity"
+            android:name=".Activities.DishMenuActivity"
             android:label="@string/title_activity_dish_menu"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".CategoryActivity"
+            android:name=".Activities.CategoryActivity"
             android:label="@string/title_activity_category"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
@@ -62,29 +62,50 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
-            android:name=".ChefDetailActivity"
+            android:name=".Activities.ChefDetailActivity"
             android:label="@string/title_activity_chef_detail"
-            android:parentActivityName=".ChefActivity"
+            android:parentActivityName=".Activities.ChefActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="app.com.example.foodie.foodieandroid.ChefActivity" />
+                android:value=".Activities.ChefActivity" />
         </activity>
         <activity
-            android:name=".DishDetailActivity"
+            android:name=".Activities.DishDetailActivity"
             android:label="@string/title_activity_dish_detail"
-            android:parentActivityName=".DishMenuActivity"
+            android:parentActivityName=".Activities.DishMenuActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".UserAccountActivity"
+            android:name=".Activities.UserAccountActivity"
             android:label="@string/title_activity_user_account"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
+        <service
+            android:name=".Services.LocationService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service
+            android:name=".Services.SortingService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service
+            android:name=".Services.FilterService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service
+            android:name=".Services.SearchService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
