@@ -30,4 +30,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_new">newActivity</string>
+
+    <string name="cat_vegetarian">Vegetarian</string>
+    <string name="cat_gluten_free">Gluten Free</string>
+    <string name="cat_chinese">Chinese</string>
+    <string name="cat_american">American</string>
+    <string name="cat_bakery">Bakery</string>
+    <string name="cat_japanese">Japanese</string>
 </resources>
