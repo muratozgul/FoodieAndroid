@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:adjustViewBounds="true"
+            android:id="@+id/chef_zhang"
             android:src="@drawable/chefasian" />
 
         <ImageView
@@ -100,6 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:adjustViewBounds="true"
+            android:id="@+id/chef_liu"
             android:src="@drawable/chefpork" />
 
         <ImageView

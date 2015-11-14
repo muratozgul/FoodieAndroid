@@ -1,11 +1,11 @@
-package app.com.example.foodie.foodieandroid.Services;
+package app.com.example.foodie.foodieandroid.LocalServices;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-public class SortingService extends Service {
-    public SortingService() {
+public class FilterService extends Service {
+    public FilterService() {
     }
 
     @Override

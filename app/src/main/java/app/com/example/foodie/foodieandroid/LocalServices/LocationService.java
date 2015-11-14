@@ -1,4 +1,4 @@
-package app.com.example.foodie.foodieandroid.Services;
+package app.com.example.foodie.foodieandroid.LocalServices;
 
 import android.app.Service;
 import android.content.Intent;
