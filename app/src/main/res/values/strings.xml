@@ -37,4 +37,5 @@
     <string name="cat_american">American</string>
     <string name="cat_bakery">Bakery</string>
     <string name="cat_japanese">Japanese</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

@@ -83,11 +83,6 @@
             android:parentActivityName=".Activities.DishMenuActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity
-            android:name=".Activities.UserAccountActivity"
-            android:label="@string/title_activity_user_account"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
 
         <service
             android:name=".LocalServices.LocationService"
@@ -109,6 +104,7 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
     </application>
 
 </manifest>

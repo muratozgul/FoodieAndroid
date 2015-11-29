@@ -1,10 +1,9 @@
 package app.com.example.foodie.foodieandroid.Model;
 
-import android.view.Menu;
-
 import java.util.ArrayList;
 
 import app.com.example.foodie.foodieandroid.Collection.Inventory;
+import app.com.example.foodie.foodieandroid.Collection.Menu;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Review;
 import app.com.example.foodie.foodieandroid.Utility.Rating;
