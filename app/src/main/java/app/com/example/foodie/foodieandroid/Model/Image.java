@@ -1,15 +1,30 @@
 package app.com.example.foodie.foodieandroid.Model;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
  * Created by Jennifer on 11/11/15.
  */
 public class Image {
     private int image_id;
-    private String url;
+    private String urlString;
+    private Bitmap image;
 
-    public Image(int image_id, String url) {
-        this.image_id = image_id;
-        this.url = url;
+    private static final String TAG = "IMAGE";
+
+    public Image(String urlString) {
+        this.urlString = urlString;
+        loadBitmap();
     }
 
     public int getImage_id() {
@@ -21,10 +36,27 @@ public class Image {
     }
 
     public String getUrl() {
-        return url;
+        return urlString;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUrl(String urlString) {
+        this.urlString = urlString;
+    }
+
+    public Bitmap loadBitmap() {
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            image = BitmapFactory.decodeStream(input);
+            Log.e(TAG,"Bitmap returned");
+            return image;
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e(TAG,e.getMessage());
+            return null;
+        }
     }
 }

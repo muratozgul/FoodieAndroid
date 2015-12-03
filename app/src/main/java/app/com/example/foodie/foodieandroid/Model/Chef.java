@@ -5,17 +5,21 @@ import java.util.ArrayList;
 import app.com.example.foodie.foodieandroid.Collection.Inventory;
 import app.com.example.foodie.foodieandroid.Collection.Menu;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
-import app.com.example.foodie.foodieandroid.ModelSecondary.Review;
 import app.com.example.foodie.foodieandroid.Utility.Rating;
 
 /**
  * Created by Jennifer on 11/11/15.
  */
 public class Chef extends User {
+
+    private Rating rating;
+    private int numOfDishes;
+    private ArrayList<Dish> dishes;
+    private ArrayList<Review> reviews;
+
+    //NOT USED FIELD!!!
     private Menu menu;
     private Inventory inventory;
-    private Rating rating;
-    private ArrayList<Review> reviews;
     private ArrayList<Order> orders;
 
     public Menu getMenu() {
@@ -56,5 +60,21 @@ public class Chef extends User {
 
     public void setOrders(ArrayList<Order> orders) {
         this.orders = orders;
+    }
+
+    public int getNumOfDishes() {
+        return numOfDishes;
+    }
+
+    public void setNumOfDishes(int numOfDishes) {
+        this.numOfDishes = numOfDishes;
+    }
+
+    public ArrayList<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(ArrayList<Dish> dishes) {
+        this.dishes = dishes;
     }
 }

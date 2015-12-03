@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import app.com.example.foodie.foodieandroid.Helpers.ShoppingCart;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
-import app.com.example.foodie.foodieandroid.ModelSecondary.Review;
-import app.com.example.foodie.foodieandroid.Utility.Location;
 
 /**
  * Created by Jennifer on 11/11/15.
@@ -15,6 +13,9 @@ public class Customer extends User {
     private ArrayList<Order> orders;
     private ShoppingCart shoppingCart;
 
+    public Customer(){
+
+    }
     public ArrayList<Review> getReviews() {
         return reviews;
     }

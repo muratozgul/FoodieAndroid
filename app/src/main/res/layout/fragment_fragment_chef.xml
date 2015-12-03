@@ -1,0 +1,43 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="app.com.example.foodie.foodieandroid.Activities.FragmentChef">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
+        <ImageView
+            android:id="@+id/chefImg"
+            android:layout_width="@dimen/thumbnail_width"
+            android:layout_height="@dimen/thumbnail_height"
+            android:src="@drawable/chef" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/chefName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="Chef Awesome"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/chefMealsServed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="49 meals served"
+                android:textColor="@color/colorSecondaryText" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
