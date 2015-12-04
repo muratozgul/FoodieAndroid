@@ -1,6 +1,5 @@
-package app.com.example.foodie.foodieandroid.Activities;
+package app.com.example.foodie.foodieandroid.Fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,10 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.squareup.picasso.Picasso;
 
 import app.com.example.foodie.foodieandroid.Model.Chef;
-import app.com.example.foodie.foodieandroid.Model.Image;
 import app.com.example.foodie.foodieandroid.R;
 
 public class FragmentChef extends Fragment {
@@ -51,6 +49,8 @@ public class FragmentChef extends Fragment {
 
         addChef();
 
+        Uri imgUri = Uri.parse(chef.getProfile_img());
+        Picasso.with(getActivity()).load(imgUri).into(chefImg);
         chefImg.setImageResource(R.drawable.chef);
         chefName.setText(chef.getName());
         chefMealsServed.setText(chef.getNumOfDishes() + " meals served");
@@ -66,6 +66,7 @@ public class FragmentChef extends Fragment {
         chef = new Chef();
         chef.setName("Chef Lee");
         chef.setNumOfDishes(30);
+        chef.setProfile_img("http://www.marbellafamilyfun.com/images/chef-and-waiter-wanted-for-summer-job-from-14th-august-for-2-weeks-21516737.jpg");
     }
 
 }

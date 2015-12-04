@@ -122,7 +122,7 @@ public class HomeActivity extends AppCompatActivity implements
                 startActivity(categoryActivity);
                 break;
             case R.id.location_map:
-                Intent locationMapActivity = new Intent(this, MapsActivity.class);
+                Intent locationMapActivity = new Intent(this, DishDetailActivity.class);
                 startActivity(locationMapActivity);
                 break;
             // ...

@@ -1,4 +1,4 @@
-package app.com.example.foodie.foodieandroid.Activities;
+package app.com.example.foodie.foodieandroid.Adapters;
 
 import android.content.Context;
 import android.net.Uri;

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="app.com.example.foodie.foodieandroid.Activities.FragmentChef">
+    tools:context="app.com.example.foodie.foodieandroid.Fragments.FragmentChef">
 
     <LinearLayout
         android:layout_width="match_parent"

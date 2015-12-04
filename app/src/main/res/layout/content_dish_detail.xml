@@ -58,13 +58,13 @@
             android:id="@+id/chefFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            class="app.com.example.foodie.foodieandroid.Activities.FragmentChef"/>
+            class="app.com.example.foodie.foodieandroid.Fragments.FragmentChef"/>
 
         <fragment
             android:id="@+id/reviewFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="app.com.example.foodie.foodieandroid.Activities.FragmentReviews"/>
+            class="app.com.example.foodie.foodieandroid.Fragments.FragmentReviews"/>
 
     </LinearLayout>
 
