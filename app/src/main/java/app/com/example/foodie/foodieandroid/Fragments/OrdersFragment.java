@@ -17,6 +17,10 @@ import app.com.example.foodie.foodieandroid.Adapters.OrderAdapter;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 import app.com.example.foodie.foodieandroid.R;
 
+//#########
+//NOT USED
+//#########
+
 public class OrdersFragment extends Fragment {
     private RecyclerView ordersRecyclerView;
     private RecyclerView.Adapter ordersAdapter;

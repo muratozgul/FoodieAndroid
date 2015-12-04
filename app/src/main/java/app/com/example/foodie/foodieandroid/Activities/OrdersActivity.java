@@ -30,26 +30,42 @@ public class OrdersActivity extends AppCompatActivity {
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //in manifest file -> set android:parentActivityName
 
         ordersRecyclerView = (RecyclerView) findViewById(R.id.ordersRecyclerView);
+        //enable optimizations if all item views are
+        // of the same height and width for significantly smoother scrolling
         //ordersRecyclerView.setHasFixedSize(true);
 
         ordersLayoutManager = new LinearLayoutManager(this);
         ordersRecyclerView.setLayoutManager(ordersLayoutManager);
 
-        orders = new ArrayList<Order>();
+        //orders = new ArrayList<Order>();
+        orders = fetchOrders();
 
         // specify an adapter
         ordersAdapter = new OrderAdapter(orders);
         ordersRecyclerView.setAdapter(ordersAdapter);
     }
 
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.orderCard:
-                Toast.makeText(getApplicationContext(), "Order Card Clicked", Toast.LENGTH_LONG).show();
-                break;
-        }
+//    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.orderCard:
+//                Toast.makeText(getApplicationContext(), "Order Card Clicked", Toast.LENGTH_LONG).show();
+//                break;
+//        }
+//    }
+
+    public List<Order> fetchOrders() {
+        List<Order> orders = new ArrayList<Order>();
+
+        orders.add(new Order(1, 10d));
+        orders.add(new Order(2, 15d));
+        orders.add(new Order(3, 12d));
+        orders.add(new Order(4, 18d));
+        orders.add(new Order(5, 22));
+
+        return orders;
     }
 }

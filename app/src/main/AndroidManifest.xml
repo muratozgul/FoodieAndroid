@@ -78,6 +78,11 @@
             android:parentActivityName=".Activities.DishMenuActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <activity
+            android:name=".Activities.OrdersActivity"
+            android:parentActivityName=".Activities.OrdersActivity"
+            android:label="@string/title_activity_orders"></activity>
+
         <service
             android:name=".LocalServices.LocationService"
             android:enabled="true"
@@ -94,10 +99,6 @@
             android:name=".LocalServices.SearchService"
             android:enabled="true"
             android:exported="true"></service>
-
-        <activity
-            android:name=".Activities.OrdersActivity"
-            android:label="@string/title_activity_orders"></activity>
     </application>
 
 </manifest>

@@ -14,6 +14,24 @@ public class Order {
     private ArrayList<OrderItem> orderItems;
     private double total_price;
 
+    public Order(){
+        this.order_id = 123;
+        this.user_id = 123;
+        this.chef_id = 123;
+        this.time_stamp = "TODAY";
+        this.orderItems = null;
+        this.total_price = 20d;
+    }
+
+    public Order(int id, double total_price){
+        this.order_id = id;
+        this.user_id = 123;
+        this.chef_id = 123;
+        this.time_stamp = "TODAY";
+        this.orderItems = null;
+        this.total_price = total_price;
+    }
+
     public int getOrder_id() {
         return order_id;
     }
