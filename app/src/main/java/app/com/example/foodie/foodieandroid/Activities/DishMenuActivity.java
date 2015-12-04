@@ -67,11 +67,11 @@ public class DishMenuActivity extends AppCompatActivity implements View.OnClickL
         List<String> tags = new ArrayList<String>();
         tags.add("Chinese");
         tags.add("Vege");
-        dishes.add(new Dish("Dim Sum", 4.5f, 3.99, tags));
-        dishes.add(new Dish("Pizza", 4, 8.99, tags));
-        dishes.add(new Dish("Ramen Noodles", 3.5f, 4.99, tags));
-        dishes.add(new Dish("Pasta", 3, 7.99, tags));
-        dishes.add(new Dish("Cake", 2, 6.99, tags));
-        dishes.add(new Dish("Salad", 1, 5.99, tags));
+        dishes.add(new Dish("Mini Raspeberry Pavlovas", 4.5f, 3.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/mini_raspeberry_pavlovas.jpg"));
+        dishes.add(new Dish("Cake", 4, 8.99, tags, "http://www.freefoodphotos.com/imagelibrary/cooking/thumbs/cake_making.jpg"));
+        dishes.add(new Dish("Strawberries", 3.5f, 4.99, tags, "http://www.freefoodphotos.com/imagelibrary/fruit/thumbs/three_strawberries.jpg"));
+        dishes.add(new Dish("Dessert Merigues", 3, 7.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/dessert_meringues.jpg"));
+        dishes.add(new Dish("Bread", 2, 6.99, tags, "http://www.freefoodphotos.com/imagelibrary/bread/thumbs/bread.jpg"));
+        dishes.add(new Dish("Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg"));
     }
 }

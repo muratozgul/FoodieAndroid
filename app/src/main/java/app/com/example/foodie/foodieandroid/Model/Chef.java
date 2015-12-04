@@ -13,7 +13,7 @@ import app.com.example.foodie.foodieandroid.Utility.Rating;
 public class Chef extends User {
 
     private Rating rating;
-    private int numOfDishes;
+    private int num_of_dishes;
     private ArrayList<Dish> dishes;
     private ArrayList<Review> reviews;
 
@@ -63,11 +63,11 @@ public class Chef extends User {
     }
 
     public int getNumOfDishes() {
-        return numOfDishes;
+        return num_of_dishes;
     }
 
-    public void setNumOfDishes(int numOfDishes) {
-        this.numOfDishes = numOfDishes;
+    public void setNumOfDishes(int num_of_dishes) {
+        this.num_of_dishes = num_of_dishes;
     }
 
     public ArrayList<Dish> getDishes() {

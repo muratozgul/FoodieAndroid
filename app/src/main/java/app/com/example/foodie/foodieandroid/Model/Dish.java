@@ -9,16 +9,17 @@ import java.util.List;
 public class Dish {
     private int dish_id;
     private String name;
-    private Image main;
+    private String dish_img;
     private float rating;
     private double price;
     private List<String> tags;
 
-    public Dish(String name, float rating, double price, List<String> tags) {
+    public Dish(String name, float rating, double price, List<String> tags, String dish_img) {
         this.name = name;
         this.rating = rating;
         this.price = price;
         this.tags = tags;
+        this.dish_img = dish_img;
     }
 
     public int getDish_id() {
@@ -37,12 +38,12 @@ public class Dish {
         this.name = name;
     }
 
-    public Image getMain() {
-        return main;
+    public String getDishImage() {
+        return dish_img;
     }
 
-    public void setMain(Image main) {
-        this.main = main;
+    public void setDishImage(String dish_img) {
+        this.dish_img = dish_img;
     }
 
     public float getRating() {

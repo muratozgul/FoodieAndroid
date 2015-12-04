@@ -1,5 +1,7 @@
 package app.com.example.foodie.foodieandroid.Activities;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -58,7 +62,10 @@ public class DishMenuAdapter extends RecyclerView.Adapter<DishMenuAdapter.DishVi
     @Override
     public void onBindViewHolder(DishViewHolder dishViewHolder, int position) {
         //TODO: Change image resource to url
-        dishViewHolder.dishImage.setImageResource(R.drawable.burger);
+        Context context = dishViewHolder.dishImage.getContext();
+        Uri dishUri = Uri.parse(dishes.get(position).getDishImage());
+        Picasso.with(context).load(dishUri).into(dishViewHolder.dishImage);
+
         dishViewHolder.dishName.setText(dishes.get(position).getName());
         dishViewHolder.dishPrice.setText("$" + Double.toString(dishes.get(position).getPrice()));
         dishViewHolder.dishRating.setRating(dishes.get(position).getRating());

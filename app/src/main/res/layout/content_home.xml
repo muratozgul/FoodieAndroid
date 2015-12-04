@@ -14,7 +14,7 @@
     tools:showIn="@layout/app_bar_user_account">
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/heroImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"

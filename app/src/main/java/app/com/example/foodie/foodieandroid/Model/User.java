@@ -9,7 +9,7 @@ import app.com.example.foodie.foodieandroid.Utility.UserSettings;
 public abstract class User {
     private int user_id;
     private String name;
-    private Image profile_img;
+    private String profile_img;
     private String username;
     private String password;
     private UserSettings settings;
@@ -31,11 +31,11 @@ public abstract class User {
         this.name = name;
     }
 
-    public Image getProfile_img() {
+    public String getProfile_img() {
         return profile_img;
     }
 
-    public void setProfile_img(Image profile_img) {
+    public void setProfile_img(String profile_img) {
         this.profile_img = profile_img;
     }
 

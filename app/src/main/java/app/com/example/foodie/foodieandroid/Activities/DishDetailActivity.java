@@ -1,6 +1,8 @@
 package app.com.example.foodie.foodieandroid.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +14,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +49,8 @@ public class DishDetailActivity extends AppCompatActivity {
         dishPrice.setText("$" + dish.getPrice());
         dishTags.setText(dish.getTags());
         ratingBar.setRating(dish.getRating());
+        Uri dishUri = Uri.parse(dish.getDishImage());
+        Picasso.with(this).load(dishUri).into(dishImage);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -52,8 +58,8 @@ public class DishDetailActivity extends AppCompatActivity {
 
     public void addDish(){
         List<String> tags = new ArrayList<String>();
-        tags.add("Chinese");
-        tags.add("Vege");
-        dish = new Dish("Pizza", 4.5f, 10.99, tags);
+        tags.add("Low fat");
+        tags.add("American");
+        dish = new Dish("Salmon Crispbread", 4.5f, 10.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/salmon_crispbread.jpg");
     }
 }
