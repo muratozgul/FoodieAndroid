@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:layout_gravity="right"
+    android:gravity="center"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/checkout"
+        android:padding="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="12dp"
+        android:minHeight="12dp"
+        android:src="@drawable/checkout_cart1">
+    </ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="16sp"
+        android:layout_alignRight="@id/checkout"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:padding="2dp"
+        android:singleLine="true"/>
+
+</RelativeLayout>

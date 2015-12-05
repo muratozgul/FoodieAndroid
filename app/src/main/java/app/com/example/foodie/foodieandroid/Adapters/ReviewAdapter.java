@@ -1,5 +1,7 @@
 package app.com.example.foodie.foodieandroid.Adapters;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,9 +11,13 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
+import app.com.example.foodie.foodieandroid.Model.Customer;
 import app.com.example.foodie.foodieandroid.Model.Review;
+import app.com.example.foodie.foodieandroid.Model.User;
 import app.com.example.foodie.foodieandroid.R;
 
 /**
@@ -50,8 +56,14 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     @Override
     public void onBindViewHolder(ReviewViewHolder reviewViewHolder, int i){
-        reviewViewHolder.reviewerImg.setImageResource(R.drawable.foodie);
-        reviewViewHolder.reviewerName.setText(reviews.get(i).getReviewer());
+        //TODO: TO BE REPLACED WITH CUSTOMER FETCH
+        Customer reviewer = new Customer(1, "Jennifer", "https://pbs.twimg.com/profile_images/494064814084608000/Upeiqf_a.jpeg");
+
+        Context context = reviewViewHolder.reviewerImg.getContext();
+        Uri uri = Uri.parse(reviewer.getProfile_img());
+        Picasso.with(context).load(uri).into(reviewViewHolder.reviewerImg);
+
+        reviewViewHolder.reviewerName.setText(reviewer.getName());
         reviewViewHolder.dishRating.setRating(reviews.get(i).getStar_rating());
         reviewViewHolder.reviewText.setText(reviews.get(i).getTimestamp());
         reviewViewHolder.reviewText.setText(reviews.get(i).getReview_text());

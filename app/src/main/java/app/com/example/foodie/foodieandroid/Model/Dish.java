@@ -13,13 +13,16 @@ public class Dish {
     private float rating;
     private double price;
     private List<String> tags;
+    private int chef_id;
 
-    public Dish(String name, float rating, double price, List<String> tags, String dish_img) {
+    public Dish(int dish_id, String name, float rating, double price, List<String> tags, String dish_img, int chef_id) {
+        this.dish_id = dish_id;
         this.name = name;
         this.rating = rating;
         this.price = price;
         this.tags = tags;
         this.dish_img = dish_img;
+        this.chef_id = chef_id;
     }
 
     public int getDish_id() {
@@ -73,5 +76,25 @@ public class Dish {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public int getChef_id() {
+        return chef_id;
+    }
+
+    public void setChef_id(int chef_id) {
+        this.chef_id = chef_id;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public String getDish_img() {
+        return dish_img;
+    }
+
+    public void setDish_img(String dish_img) {
+        this.dish_img = dish_img;
     }
 }

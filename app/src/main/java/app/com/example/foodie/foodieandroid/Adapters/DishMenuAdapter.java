@@ -1,6 +1,7 @@
 package app.com.example.foodie.foodieandroid.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import app.com.example.foodie.foodieandroid.Activities.DishDetailActivity;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.R;
 
@@ -60,8 +62,7 @@ public class DishMenuAdapter extends RecyclerView.Adapter<DishMenuAdapter.DishVi
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(DishViewHolder dishViewHolder, int position) {
-        //TODO: Change image resource to url
+    public void onBindViewHolder(DishViewHolder dishViewHolder, final int position) {
         Context context = dishViewHolder.dishImage.getContext();
         Uri dishUri = Uri.parse(dishes.get(position).getDishImage());
         Picasso.with(context).load(dishUri).into(dishViewHolder.dishImage);
@@ -70,6 +71,15 @@ public class DishMenuAdapter extends RecyclerView.Adapter<DishMenuAdapter.DishVi
         dishViewHolder.dishPrice.setText("$" + Double.toString(dishes.get(position).getPrice()));
         dishViewHolder.dishRating.setRating(dishes.get(position).getRating());
         dishViewHolder.dishTags.setText(dishes.get(position).getTags());
+        dishViewHolder.cv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent detailIntent = new Intent(view.getContext(), DishDetailActivity.class);
+                detailIntent.putExtra("dish_id", dishes.get(position).getDish_id());
+                view.getContext().startActivity(detailIntent);
+            }
+        });
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

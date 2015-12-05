@@ -13,9 +13,10 @@ public class Customer extends User {
     private ArrayList<Order> orders;
     private ShoppingCart shoppingCart;
 
-    public Customer(){
-
+    public Customer(int user_id, String name, String profile_img) {
+        super(user_id, name, profile_img);
     }
+
     public ArrayList<Review> getReviews() {
         return reviews;
     }

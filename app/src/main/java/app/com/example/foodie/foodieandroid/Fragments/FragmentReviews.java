@@ -42,6 +42,7 @@ public class FragmentReviews extends Fragment {
         reviewRV.setHasFixedSize(false);
         reviewRV.setNestedScrollingEnabled(false);
         reviewRV.setMinimumHeight(1500);
+        reviewRV.setFocusable(false);
 
         reviewManager = new LinearLayoutManager(view.getContext());
         reviewRV.setLayoutManager(reviewManager);
@@ -63,11 +64,11 @@ public class FragmentReviews extends Fragment {
     public void addReviews(){
         reviews = new ArrayList<Review>();
 
-        reviews.add(new Review(1, 4.5f, "Jennifer", "This is really really delicious", "03/05/2015"));
-        reviews.add(new Review(1, 4.0f, "Faye", "This is really really delicious", "03/05/2015"));
-        reviews.add(new Review(1, 3.5f, "Murat", "This is really really delicious", "03/05/2015"));
-        reviews.add(new Review(1, 2.5f, "Jennifer", "This is really really delicious", "03/05/2015"));
-        reviews.add(new Review(1, 1.0f, "Jennifer", "This is really really delicious", "03/05/2015"));
-        reviews.add(new Review(1, 5.0f, "Jennifer", "This is really really delicious", "03/05/2015"));
+        reviews.add(new Review(1, 4.5f, "This is really really delicious 1", "03/05/2015", 1, 1));
+        reviews.add(new Review(2, 4.0f, "This is really really delicious 2", "03/05/2015", 2, 2));
+        reviews.add(new Review(3, 3.5f, "This is really really delicious 3", "03/05/2015", 1, 3));
+        reviews.add(new Review(4, 2.5f, "This is really really delicious 4", "03/05/2015", 2, 4));
+        reviews.add(new Review(5, 1.0f, "This is really really delicious 5", "03/05/2015", 1, 5));
+        reviews.add(new Review(6, 5.0f, "This is really really delicious 6", "03/05/2015", 2, 6));
     }
 }

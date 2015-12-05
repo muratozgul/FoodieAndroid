@@ -15,6 +15,12 @@ public abstract class User {
     private UserSettings settings;
     private Location location;
 
+    public User(int user_id, String name, String profile_img) {
+        this.user_id = user_id;
+        this.name = name;
+        this.profile_img = profile_img;
+    }
+
     public int getUser_id() {
         return user_id;
     }

@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public class HomeActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
     private ImageView heroImage;
+    private Button checkoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,11 @@ public class HomeActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.user_account, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.menu_checkout, menu);
+        View count = menu.findItem(R.id.checkout).getActionView();
+//        checkoutButton = (Button) count.findViewById(R.id.shopping_cart);
+//        checkoutButton.setText("2");
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

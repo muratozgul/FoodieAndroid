@@ -17,7 +17,7 @@ import app.com.example.foodie.foodieandroid.R;
 /**
  * Created by Jennifer on 11/11/15.
  */
-public class DishMenuActivity extends AppCompatActivity implements View.OnClickListener{
+public class DishMenuActivity extends AppCompatActivity{
     private RecyclerView dishMenuRV;
     private RecyclerView.Adapter dishMenuAdapter;
     private RecyclerView.LayoutManager dishMenuLayoutManager;
@@ -29,6 +29,7 @@ public class DishMenuActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_dish_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Menu");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -44,18 +45,6 @@ public class DishMenuActivity extends AppCompatActivity implements View.OnClickL
         // specify an adapter (see also next example)
         dishMenuAdapter = new DishMenuAdapter(dishes);
         dishMenuRV.setAdapter(dishMenuAdapter);
-
-        //findViewById(R.id.dishImage).setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.dishImage:
-                Intent dishDetailActivity1 = new Intent(this, DishDetailActivity.class);
-                startActivity(dishDetailActivity1);
-                break;
-        }
     }
 
     public void addDish(){
@@ -63,11 +52,11 @@ public class DishMenuActivity extends AppCompatActivity implements View.OnClickL
         List<String> tags = new ArrayList<String>();
         tags.add("Chinese");
         tags.add("Vege");
-        dishes.add(new Dish("Mini Raspeberry Pavlovas", 4.5f, 3.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/mini_raspeberry_pavlovas.jpg"));
-        dishes.add(new Dish("Cake", 4, 8.99, tags, "http://www.freefoodphotos.com/imagelibrary/cooking/thumbs/cake_making.jpg"));
-        dishes.add(new Dish("Strawberries", 3.5f, 4.99, tags, "http://www.freefoodphotos.com/imagelibrary/fruit/thumbs/three_strawberries.jpg"));
-        dishes.add(new Dish("Dessert Merigues", 3, 7.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/dessert_meringues.jpg"));
-        dishes.add(new Dish("Bread", 2, 6.99, tags, "http://www.freefoodphotos.com/imagelibrary/bread/thumbs/bread.jpg"));
-        dishes.add(new Dish("Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg"));
+        dishes.add(new Dish(1, "Mini Raspeberry Pavlovas", 4.5f, 3.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/mini_raspeberry_pavlovas.jpg", 11));
+        dishes.add(new Dish(2, "Cake", 4, 8.99, tags, "http://www.freefoodphotos.com/imagelibrary/cooking/thumbs/cake_making.jpg",12));
+        dishes.add(new Dish(3, "Strawberries", 3.5f, 4.99, tags, "http://www.freefoodphotos.com/imagelibrary/fruit/thumbs/three_strawberries.jpg", 13));
+        dishes.add(new Dish(4, "Dessert Merigues", 3, 7.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/dessert_meringues.jpg", 11));
+        dishes.add(new Dish(5, "Bread", 2, 6.99, tags, "http://www.freefoodphotos.com/imagelibrary/bread/thumbs/bread.jpg", 12));
+        dishes.add(new Dish(6, "Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg", 13));
     }
 }

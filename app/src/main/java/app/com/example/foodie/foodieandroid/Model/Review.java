@@ -9,26 +9,18 @@ public class Review {
     private float star_rating;
     private String review_text;
     private String timestamp;
-    private String reviewer;
-
     private int customer_id;
     private int dish_id;
+
     private int orderitem_id;
 
-    public Review(int review_id, float star_rating, String reviewer, String review_text, String timestamp) {
+    public Review(int review_id, float star_rating, String review_text, String timestamp, int customer_id, int dish_id) {
         this.review_id = review_id;
         this.star_rating = star_rating;
-        this.reviewer = reviewer;
         this.review_text = review_text;
         this.timestamp = timestamp;
-    }
-
-    public String getReviewer() {
-        return reviewer;
-    }
-
-    public void setReviewer(String reviewer) {
-        this.reviewer = reviewer;
+        this.customer_id = customer_id;
+        this.dish_id = dish_id;
     }
 
     public void setStar_rating(float star_rating) {

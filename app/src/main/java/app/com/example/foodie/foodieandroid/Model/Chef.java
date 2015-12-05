@@ -22,6 +22,10 @@ public class Chef extends User {
     private Inventory inventory;
     private ArrayList<Order> orders;
 
+    public Chef(int user_id, String name, String profile_img) {
+        super(user_id, name, profile_img);
+    }
+
     public Menu getMenu() {
         return menu;
     }
