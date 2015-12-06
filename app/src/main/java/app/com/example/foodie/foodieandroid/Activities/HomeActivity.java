@@ -39,10 +39,10 @@ public class HomeActivity extends AppCompatActivity implements
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        findViewById(R.id.chef_list).setOnClickListener(this);
+//        findViewById(R.id.chef_list).setOnClickListener(this);
         findViewById(R.id.dish_list).setOnClickListener(this);
-        findViewById(R.id.categories).setOnClickListener(this);
-        findViewById(R.id.location_map).setOnClickListener(this);
+//        findViewById(R.id.categories).setOnClickListener(this);
+//        findViewById(R.id.location_map).setOnClickListener(this);
     }
 
     @Override
@@ -73,7 +73,9 @@ public class HomeActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.checkout) {
+            Intent checkoutIntent = new Intent(this, CheckoutActivity.class);
+            startActivity(checkoutIntent);
             return true;
         }
 

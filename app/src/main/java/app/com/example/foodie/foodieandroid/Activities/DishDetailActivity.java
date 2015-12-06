@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -69,6 +70,14 @@ public class DishDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_checkout, menu);
+        View count = menu.findItem(R.id.checkout).getActionView();
+        return super.onCreateOptionsMenu(menu);
+    }
+    
     public void findDish(int id){
         List<Dish> dishes = new ArrayList<Dish>();
         List<String> tags = new ArrayList<String>();

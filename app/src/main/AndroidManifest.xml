@@ -105,6 +105,11 @@
             android:exported="true" >
         </service>
 
+        <activity
+            android:name=".Activities.CheckoutActivity"
+            android:label="@string/title_activity_checkout"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>
