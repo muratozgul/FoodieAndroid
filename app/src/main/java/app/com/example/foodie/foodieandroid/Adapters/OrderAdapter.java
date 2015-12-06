@@ -1,5 +1,7 @@
 package app.com.example.foodie.foodieandroid.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,14 +15,19 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.com.example.foodie.foodieandroid.Activities.OrderDetailsActivity;
+import app.com.example.foodie.foodieandroid.Activities.OrdersActivity;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
+import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 import app.com.example.foodie.foodieandroid.R;
 
 /**
  * Created by muratozgul on 03/12/15.
  */
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder>{
+    private static final String TAG = "OrderAdapter";
     private List<Order> orders;
+    private Context context;
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CardView orderCardView;
@@ -52,29 +59,24 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         @Override
         public void onClick(View v) {
+            int position = this.getAdapterPosition();
             if (v instanceof Button){
                 //get adapter position for item represented by this view
-                int position = this.getAdapterPosition();
-                //Toast.makeText(v.getContext(), "Details Button Clicked " + Integer.toString(position),
-                //        Toast.LENGTH_SHORT).show();
                 mListener.onDetailsButtonClick((Button) v, position);
             } else {
-                mListener.onCardClick(v);
+                mListener.onCardClick(v, position);
             }
         }
 
         public static interface IOrderViewHolderClicks {
-            public void onCardClick(View caller);
+            public void onCardClick(View caller, int position);
             public void onDetailsButtonClick(Button callerButton, int position);
         }
     }
 
-    public OrderAdapter(List<Order> orders) {
+    public OrderAdapter(List<Order> orders, Context context) {
         this.orders = orders;
-    }
-
-    public OrderAdapter() {
-        this.orders = new ArrayList<Order>();
+        this.context = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -85,13 +87,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         OrderViewHolder ovh = new OrderViewHolder(view,
                 new OrderAdapter.OrderViewHolder.IOrderViewHolderClicks() {
-                    public void onCardClick(View caller) { Log.v("OrderAdapter", "Caller View"); }
-                    public void onDetailsButtonClick(Button callerButton, int position) {
-                        Log.v("OrderAdapter","Caller Button");
+                    public void onCardClick(View caller, int position) {
                         Order order = getOrder(position);
-                        String orderId = Integer.toString(order.getOrder_id());
+                        Toast.makeText(view.getContext(), "(Adapter) Card Clicked: " + order.toString(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    public void onDetailsButtonClick(Button callerButton, int position) {
+                        Order order = getOrder(position);
                         Toast.makeText(view.getContext(), "(Adapter) Details Button Clicked " + Integer.toString(position),
                                 Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(context, OrderDetailsActivity.class);
+                        intent.putExtra("order", order);
+                        context.startActivity(intent);
                     }
                 });
 
@@ -103,7 +111,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(OrderViewHolder orderViewHolder, int position) {
         Order order = orders.get(position);
 
-        orderViewHolder.orderIdView.setText("Order: "+ Integer.toString(order.getOrder_id()));
+        orderViewHolder.orderIdView.setText("Order: "+ Integer.toString(order.getId()));
         orderViewHolder.orderDateView.setText(order.getTime_stamp());
         orderViewHolder.orderChefView.setText("DummyChefName");
         orderViewHolder.orderContentsView.setText("Order Contents");

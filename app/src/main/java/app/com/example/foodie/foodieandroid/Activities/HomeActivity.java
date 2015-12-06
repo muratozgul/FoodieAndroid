@@ -3,7 +3,6 @@ package app.com.example.foodie.foodieandroid.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import app.com.example.foodie.foodieandroid.Fragments.OrdersFragment;
 import app.com.example.foodie.foodieandroid.R;
 
 public class HomeActivity extends AppCompatActivity implements
