@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.com.example.foodie.foodieandroid" >
+    package="app.com.example.foodie.foodieandroid">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -19,10 +19,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:name=".Application.FoodieApp"
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,26 +33,22 @@
         <activity
             android:name=".Activities.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.ChefActivity"
             android:label="@string/title_activity_chef"
             android:parentActivityName=".Activities.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.DishMenuActivity"
             android:label="@string/title_activity_dish_menu"
             android:parentActivityName=".Activities.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.CategoryActivity"
             android:label="@string/title_activity_category"
             android:parentActivityName=".Activities.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -66,13 +63,12 @@
 
         <activity
             android:name=".Activities.MapsActivity"
-            android:label="@string/title_activity_maps" >
-        </activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".Activities.ChefDetailActivity"
             android:label="@string/title_activity_chef_detail"
             android:parentActivityName=".Activities.ChefActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.ChefActivity" />
@@ -81,29 +77,31 @@
             android:name=".Activities.DishDetailActivity"
             android:label="@string/title_activity_dish_detail"
             android:parentActivityName=".Activities.DishMenuActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.OrdersActivity"
+            android:label="@string/title_activity_orders"
+            android:parentActivityName=".Activities.HomeActivity" />
+        <activity
+            android:name=".Activities.OrderDetailsActivity"
+            android:parentActivityName=".Activities.OrdersActivity" />
         <service
             android:name=".LocalServices.LocationService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true" />
         <service
             android:name=".LocalServices.SortingService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true" />
         <service
             android:name=".LocalServices.FilterService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true" />
         <service
             android:name=".LocalServices.SearchService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true" />
+
 
         <activity
             android:name=".Activities.CheckoutActivity"

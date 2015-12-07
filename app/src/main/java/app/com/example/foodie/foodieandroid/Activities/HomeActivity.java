@@ -20,6 +20,7 @@ import app.com.example.foodie.foodieandroid.R;
 public class HomeActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
+
     private ImageView heroImage;
     private Button checkoutButton;
 
@@ -31,8 +32,10 @@ public class HomeActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -88,9 +91,12 @@ public class HomeActivity extends AppCompatActivity implements
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_history) {
-            Toast.makeText(getApplicationContext(), "This will display order history!",
-                    Toast.LENGTH_SHORT).show();
+        if (id == R.id.nav_orders) {
+            //Customer Orders (History)
+            //Toast.makeText(getApplicationContext(), "This will display order history!", Toast.LENGTH_SHORT).show();
+            Intent ordersActivity = new Intent(this, OrdersActivity.class);
+            startActivity(ordersActivity);
+
         } else if (id == R.id.nav_review) {
             Toast.makeText(getApplicationContext(), "This will display review history!",
                     Toast.LENGTH_SHORT).show();

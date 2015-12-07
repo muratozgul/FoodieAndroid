@@ -1,25 +1,63 @@
 package app.com.example.foodie.foodieandroid.ModelSecondary;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
 import java.util.ArrayList;
 
-/**
- * Created by Jennifer on 11/11/15.
- */
 
-public class Order {
-    private int order_id;
+public class Order implements Parcelable{
+    private static final String TAG = "Order";
+
+    private int id;
     private int user_id;
     private int chef_id;
     private String time_stamp;
     private ArrayList<OrderItem> orderItems;
     private double total_price;
 
-    public int getOrder_id() {
-        return order_id;
+    //############################
+    //Constructors
+    //############################
+
+    public Order(){
+        this.id = 123;
+        this.user_id = 123;
+        this.chef_id = 123;
+        this.time_stamp = "TODAY";
+        this.orderItems = new ArrayList<OrderItem>();
+        this.total_price = 20d;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    public Order(int id, double total_price){
+        this.id = id;
+        this.user_id = 123;
+        this.chef_id = 123;
+        this.time_stamp = "TODAY";
+        this.orderItems = new ArrayList<OrderItem>();
+        this.total_price = total_price;
+    }
+
+    public Order(int id, int userId, int chefId, String time, ArrayList<OrderItem> list, double totalPrice){
+        this.id = id;
+        this.user_id = userId;
+        this.chef_id = chefId;
+        this.time_stamp = time;
+        this.orderItems = list;
+        this.total_price = totalPrice;
+    }
+
+    //############################
+    //Getters & Setters
+    //############################
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUser_id() {
@@ -60,5 +98,68 @@ public class Order {
 
     public void setTotal_price(double total_price) {
         this.total_price = total_price;
+    }
+
+    //############################
+    //Parcelable Interface Methods
+    //############################
+
+    //Parcelable used for passing objects via intents
+    //Parcelable is faster than serializable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(id);
+        out.writeInt(user_id);
+        out.writeInt(chef_id);
+        out.writeString(time_stamp);
+        out.writeDouble(total_price);
+        out.writeTypedList(orderItems); //writeTypedList
+    }
+
+    // This is used to regenerate order object.
+    // All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Order> CREATOR = new Parcelable.Creator<Order>() {
+        public Order createFromParcel(Parcel in) {
+            return new Order(in);
+        }
+
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
+
+    // constructor that takes a Parcel and gives you an object populated with it's values
+    private Order(Parcel in) {
+        //read in the same order as writes
+        this.id = in.readInt();
+        this.user_id = in.readInt();
+        this.chef_id = in.readInt();
+        this.time_stamp = in.readString();
+        this.total_price = in.readDouble();
+
+        // readTypeList() needs an existing List<> to load.
+        ArrayList<OrderItem> tempList = new ArrayList<OrderItem>();
+        in.readTypedList(tempList, OrderItem.CREATOR); // OrderItem.class.getClassLoader()
+        this.orderItems = tempList;
+    }
+
+    //############################
+    //Other Methods
+    //############################
+
+    public void addOrderItem(OrderItem orderItem){
+        this.orderItems.add(orderItem);
+    }
+
+    public String toString(){
+        String output = "Order id: " + Integer.toString(this.id);
+        output += " has " + Integer.toString(this.orderItems.size());
+        output += " order items.";
+        return output;
     }
 }
