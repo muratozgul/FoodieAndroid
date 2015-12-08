@@ -15,6 +15,10 @@ public class Dish {
     private List<String> tags;
     private int chef_id;
 
+    //############################
+    //Constructors
+    //############################
+
     public Dish(int dish_id, String name, float rating, double price, List<String> tags, String dish_img, int chef_id) {
         this.dish_id = dish_id;
         this.name = name;
@@ -24,6 +28,20 @@ public class Dish {
         this.dish_img = dish_img;
         this.chef_id = chef_id;
     }
+
+    public Dish(int dish_id, String name, double price) {
+        this.dish_id = dish_id;
+        this.name = name;
+        this.rating = 4;
+        this.price = price;
+        this.tags = null;
+        this.dish_img = "";
+        this.chef_id = 0;
+    }
+
+    //############################
+    //Getters & Setters
+    //############################
 
     public int getDish_id() {
         return dish_id;
@@ -96,5 +114,18 @@ public class Dish {
 
     public void setDish_img(String dish_img) {
         this.dish_img = dish_img;
+    }
+
+    //############################
+    //HashMap Comparison Methods
+    //############################
+    @Override
+    public int hashCode(){
+        return dish_id;
+    }
+
+    @Override
+    public boolean equals(Object otherObj) {
+        return otherObj instanceof Dish && this.dish_id == ((Dish) otherObj).dish_id;
     }
 }

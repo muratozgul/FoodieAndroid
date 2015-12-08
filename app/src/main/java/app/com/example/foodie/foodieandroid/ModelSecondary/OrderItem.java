@@ -5,11 +5,14 @@ import android.os.Parcelable;
 
 import java.util.List;
 
+import app.com.example.foodie.foodieandroid.Model.Dish;
+
 public class OrderItem implements Parcelable {
     private int id;
     private int order_id;
     private int dish_id;
     private int quantity;
+    private double totalPrice;
 
     //############################
     //Constructors
@@ -20,6 +23,18 @@ public class OrderItem implements Parcelable {
         this.order_id = orderId;
         this.dish_id = dish_id;
         this.quantity = quantity;
+    }
+
+    public OrderItem(int dish_id, int quantity, double totalPrice) {
+        this.dish_id = dish_id;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
+
+    public OrderItem(Dish dish, int quantity, double totalPrice) {
+        this.dish_id = dish.getDish_id();
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
     }
 
     //############################
@@ -56,6 +71,14 @@ public class OrderItem implements Parcelable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     //############################

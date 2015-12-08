@@ -5,6 +5,10 @@ import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import app.com.example.foodie.foodieandroid.Model.Dish;
 
 
 public class Order implements Parcelable{
@@ -46,6 +50,21 @@ public class Order implements Parcelable{
         this.time_stamp = time;
         this.orderItems = list;
         this.total_price = totalPrice;
+    }
+
+    public Order(HashMap<Dish, Integer> dishes){
+        this.orderItems = new ArrayList<OrderItem>();
+        this.total_price = 0d;
+
+        for (Map.Entry<Dish, Integer> entry : dishes.entrySet()) {
+            Dish dish = entry.getKey();
+            int quantity = entry.getValue().intValue();
+
+            double price = quantity*dish.getPrice();
+
+            this.orderItems.add(new OrderItem(dish.getDish_id(), quantity, price));
+            this.total_price += price;
+        }
     }
 
     //############################
@@ -154,6 +173,10 @@ public class Order implements Parcelable{
 
     public void addOrderItem(OrderItem orderItem){
         this.orderItems.add(orderItem);
+    }
+
+    public OrderItem getOrderItem(int index){
+        return this.orderItems.get(index);
     }
 
     public String toString(){
