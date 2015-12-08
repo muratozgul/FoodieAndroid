@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Adapters.OrderAdapter;
+import app.com.example.foodie.foodieandroid.DAO.OrderDAO;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 import app.com.example.foodie.foodieandroid.R;
@@ -51,6 +52,8 @@ public class OrdersActivity extends AppCompatActivity {
     }
 
     public List<Order> fetchOrders() {
+        OrderDAO.findById(1);
+
         List<Order> orders = new ArrayList<Order>();
 
         Order order1 = new Order(1, 10d);
