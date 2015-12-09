@@ -43,6 +43,14 @@ public class Order implements Parcelable{
         this.total_price = total_price;
     }
 
+    public Order(int id, int customerId, String createdAt, double price){
+        this.id = id;
+        this.user_id  = customerId;
+        this.time_stamp = createdAt;
+        this.total_price = price;
+        this.orderItems = new ArrayList<OrderItem>();
+    }
+
     public Order(int id, int userId, int chefId, String time, ArrayList<OrderItem> list, double totalPrice){
         this.id = id;
         this.user_id = userId;
