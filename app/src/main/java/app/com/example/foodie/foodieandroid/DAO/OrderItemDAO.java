@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class OrderItemDAO {
     private static final String restApiBaseUrl = "http://www.foodie.com/";
-    private static final String orderItemsUrl = "/orderitems";
+    private static final String orderItemsUrl = "/orderitem";
     private static final String TAG = "OrderItemDAO";
 
     // Return all OrderItems associated to the user
@@ -32,7 +32,6 @@ public class OrderItemDAO {
 
     // Return all OrderItems of an order
     public static ArrayList<OrderItem> findByOrderId(int orderId) {
-
 
         return null;
     }

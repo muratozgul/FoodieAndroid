@@ -4,17 +4,34 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import app.com.example.foodie.foodieandroid.Model.Dish;
 
 
 public class Order implements Parcelable{
     private static final String TAG = "Order";
 
+    @SerializedName("id")
     private int id;
+
+    @SerializedName("user_id")
     private int user_id;
+
+    @SerializedName("chef_id")
     private int chef_id;
+
+    @SerializedName("createdAt")
     private String time_stamp;
+
+    @SerializedName("orderItems")
     private ArrayList<OrderItem> orderItems;
+
+    @SerializedName("price")
     private double total_price;
 
     //############################
@@ -39,6 +56,14 @@ public class Order implements Parcelable{
         this.total_price = total_price;
     }
 
+    public Order(int id, int customerId, String createdAt, double price){
+        this.id = id;
+        this.user_id  = customerId;
+        this.time_stamp = createdAt;
+        this.total_price = price;
+        this.orderItems = new ArrayList<OrderItem>();
+    }
+
     public Order(int id, int userId, int chefId, String time, ArrayList<OrderItem> list, double totalPrice){
         this.id = id;
         this.user_id = userId;
@@ -46,6 +71,21 @@ public class Order implements Parcelable{
         this.time_stamp = time;
         this.orderItems = list;
         this.total_price = totalPrice;
+    }
+
+    public Order(HashMap<Dish, Integer> dishes){
+        this.orderItems = new ArrayList<OrderItem>();
+        this.total_price = 0d;
+
+        for (Map.Entry<Dish, Integer> entry : dishes.entrySet()) {
+            Dish dish = entry.getKey();
+            int quantity = entry.getValue().intValue();
+
+            double price = quantity*dish.getPrice();
+
+            this.orderItems.add(new OrderItem(dish.getDish_id(), quantity, price));
+            this.total_price += price;
+        }
     }
 
     //############################
@@ -149,11 +189,29 @@ public class Order implements Parcelable{
     }
 
     //############################
+    //HashMap Comparison Methods
+    //############################
+
+    @Override
+    public int hashCode(){
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object otherObj) {
+        return otherObj instanceof Order && this.id == ((Order) otherObj).id;
+    }
+
+    //############################
     //Other Methods
     //############################
 
     public void addOrderItem(OrderItem orderItem){
         this.orderItems.add(orderItem);
+    }
+
+    public OrderItem getOrderItem(int index){
+        return this.orderItems.get(index);
     }
 
     public String toString(){
