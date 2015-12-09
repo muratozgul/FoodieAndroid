@@ -1,6 +1,7 @@
 package app.com.example.foodie.foodieandroid.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Collection.Inventory;
 import app.com.example.foodie.foodieandroid.Collection.Menu;
@@ -12,8 +13,9 @@ import app.com.example.foodie.foodieandroid.Utility.Rating;
  */
 public class Chef extends User {
 
-    private Rating rating;
+    private float rating;
     private int num_of_dishes;
+    private List<String> tags;
     private ArrayList<Dish> dishes;
     private ArrayList<Review> reviews;
 
@@ -24,6 +26,28 @@ public class Chef extends User {
 
     public Chef(int user_id, String name, String profile_img) {
         super(user_id, name, profile_img);
+    }
+
+    public int getNum_of_dishes() {
+        return num_of_dishes;
+    }
+
+    public void setNum_of_dishes(int num_of_dishes) {
+        this.num_of_dishes = num_of_dishes;
+    }
+
+    public String getTags() {
+        StringBuilder allTags = new StringBuilder();
+        for(int i = 0; i < tags.size() - 1; i++){
+            allTags.append(tags.get(i));
+            allTags.append(" | ");
+        }
+        allTags.append(tags.get(tags.size()-1));
+        return allTags.toString();
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
     public Menu getMenu() {
@@ -42,11 +66,11 @@ public class Chef extends User {
         this.inventory = inventory;
     }
 
-    public Rating getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(Rating rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 

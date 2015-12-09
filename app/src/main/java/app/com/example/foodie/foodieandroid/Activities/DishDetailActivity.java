@@ -77,7 +77,7 @@ public class DishDetailActivity extends AppCompatActivity {
         View count = menu.findItem(R.id.checkout).getActionView();
         return super.onCreateOptionsMenu(menu);
     }
-    
+
     public void findDish(int id){
         List<Dish> dishes = new ArrayList<Dish>();
         List<String> tags = new ArrayList<String>();

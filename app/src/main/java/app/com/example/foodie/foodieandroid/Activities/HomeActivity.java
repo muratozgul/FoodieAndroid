@@ -21,7 +21,7 @@ public class HomeActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener {
 
-    private ImageView heroImage;
+    private ImageView customerImg;
     private Button checkoutButton;
 
     @Override
@@ -42,7 +42,8 @@ public class HomeActivity extends AppCompatActivity implements
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        findViewById(R.id.chef_list).setOnClickListener(this);
+
+        findViewById(R.id.chef_list).setOnClickListener(this);
         findViewById(R.id.dish_list).setOnClickListener(this);
 //        findViewById(R.id.categories).setOnClickListener(this);
 //        findViewById(R.id.location_map).setOnClickListener(this);
@@ -89,6 +90,7 @@ public class HomeActivity extends AppCompatActivity implements
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_orders) {

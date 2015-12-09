@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <android.support.v7.widget.CardView
@@ -17,59 +19,65 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:padding="10dp">
 
             <TextView
+                android:id="@+id/orderCard_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Order: 123"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:id="@+id/orderCard_id" />
+                android:text="Order#: 123"
+                android:paddingBottom="10dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
                 android:id="@+id/orderCard_date"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/orderCard_chef"
-                android:layout_below="@id/orderCard_id" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="11/28/2015 16:29:30"
+                android:paddingBottom="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
+                android:id="@+id/orderCard_chef"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderCard_id"
+                android:text="Chef Emily"
+                android:paddingBottom="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/orderCard_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/orderCard_contents"
-                android:layout_below="@id/orderCard_chef" />
+                android:layout_below="@id/orderCard_chef"
+                android:text="Beef Steak x 2"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
+                android:id="@+id/orderCard_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/orderCard_price"
+                android:layout_alignBaseline="@+id/orderCard_detailsButton"
                 android:layout_alignParentLeft="true"
-                android:layout_alignBaseline="@+id/orderCard_detailsButton" />
+                android:text="Total: 49.99"
+                android:textColor="@color/colorPrimaryText"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
-                style="?android:attr/buttonStyleSmall"
+                android:id="@+id/orderCard_detailsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Details"
-                android:layout_below="@id/orderCard_contents"
                 android:layout_alignParentRight="true"
-                android:id="@+id/orderCard_detailsButton" />
+                android:layout_below="@id/orderCard_contents"
+                android:background="@drawable/button"
+                android:textColor="@color/colorIcons"
+                android:text="Details" />
 
 
         </RelativeLayout>

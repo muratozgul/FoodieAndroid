@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="app.com.example.foodie.foodieandroid.Activities.ChefActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/chefCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#eee">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
+
+            <!--<HorizontalScrollView-->
+                <!--android:id="@+id/horizontalScrollView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal">-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="150dp"-->
+                    <!--android:scaleType="centerCrop"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="150dp"-->
+                        <!--android:layout_margin="10dp"-->
+                        <!--android:scaleType="centerCrop"-->
+                        <!--android:src="@drawable/samon" />-->
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="150dp"-->
+                        <!--android:layout_margin="10dp"-->
+                        <!--android:scaleType="centerCrop"-->
+                        <!--android:src="@drawable/burger"/>-->
+
+                <!--</LinearLayout>-->
+
+            <!--</HorizontalScrollView>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/chefImg"
+                    android:layout_width="@dimen/thumbnail_width"
+                    android:layout_height="@dimen/thumbnail_height"
+                    android:src="@drawable/chef" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp">
+
+                        <TextView
+                            android:id="@+id/chefName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:paddingTop="8dp"
+                            android:text="Chef Lee"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/chefMealsServed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="right"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:text="49 meals served"
+                            android:textColor="@color/colorSecondaryText" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingRight="10dp">
+
+                        <RatingBar
+                            android:id="@+id/chefRating"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:paddingTop="10dp"
+                            android:progressDrawable="@drawable/ratingbar"
+                            android:rating="4.5" />
+
+                        <TextView
+                            android:id="@+id/chefTags"
+                            style="@style/tagStyle"
+                            android:layout_alignParentRight="true"
+                            android:text="Chinese | Vege" />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -67,10 +67,11 @@ public class Dish {
 
     public String getTags() {
         StringBuilder allTags = new StringBuilder();
-        for(int i = 0; i < tags.size(); i++){
+        for(int i = 0; i < tags.size()-1; i++){
             allTags.append(tags.get(i));
             allTags.append(" | ");
         }
+        allTags.append(tags.get(tags.size()-1));
         return allTags.toString();
     }
 
