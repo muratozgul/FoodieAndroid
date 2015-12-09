@@ -8,17 +8,20 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Adapters.DishMenuAdapter;
+import app.com.example.foodie.foodieandroid.DAO.DishDAO;
+import app.com.example.foodie.foodieandroid.DAO.IDishCallback;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.R;
 /**
  * Created by Jennifer on 11/11/15.
  */
-public class DishMenuActivity extends AppCompatActivity{
+public class DishMenuActivity extends AppCompatActivity implements IDishCallback{
     private RecyclerView dishMenuRV;
     private RecyclerView.Adapter dishMenuAdapter;
     private RecyclerView.LayoutManager dishMenuLayoutManager;
@@ -46,6 +49,8 @@ public class DishMenuActivity extends AppCompatActivity{
         // specify an adapter (see also next example)
         dishMenuAdapter = new DishMenuAdapter(dishes);
         dishMenuRV.setAdapter(dishMenuAdapter);
+
+        fetchDishesFromServer();
     }
 
     @Override
@@ -67,5 +72,35 @@ public class DishMenuActivity extends AppCompatActivity{
         dishes.add(new Dish(4, "Dessert Merigues", 3, 7.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/dessert_meringues.jpg", 11));
         dishes.add(new Dish(5, "Bread", 2, 6.99, tags, "http://www.freefoodphotos.com/imagelibrary/bread/thumbs/bread.jpg", 12));
         dishes.add(new Dish(6, "Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg", 13));
+    }
+
+    public void fetchDishesFromServer(){
+        DishDAO.findAll(this);
+    }
+
+    //############################
+    //IOrderCallback Interface Methods
+    //############################
+
+    @Override
+    public void findDishByIdCb(Dish dish) {
+        this.dishes.add(dish);
+        this.dishMenuAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void findDishByIdCb(String responseString) {
+        Toast.makeText(this, responseString, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void findAllDishesCb(ArrayList<Dish> dishes) {
+        this.dishes.addAll(dishes);
+        this.dishMenuAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void findAllDishesCb(String responseString) {
+        Toast.makeText(this, responseString, Toast.LENGTH_SHORT).show();
     }
 }

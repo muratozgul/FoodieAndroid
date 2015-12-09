@@ -3,15 +3,25 @@ package app.com.example.foodie.foodieandroid.ModelSecondary;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 import app.com.example.foodie.foodieandroid.Model.Dish;
 
 public class OrderItem implements Parcelable {
+
+    @SerializedName("id")
     private int id;
+
+    @SerializedName("order_id")
     private int order_id;
+
+    @SerializedName("dish_id")
     private int dish_id;
+
+    @SerializedName("quantity")
     private int quantity;
+
+    @SerializedName("price")
     private double totalPrice;
 
     //############################
@@ -119,6 +129,20 @@ public class OrderItem implements Parcelable {
         this.order_id = in.readInt();
         this.dish_id = in.readInt();
         this.quantity = in.readInt();
+    }
+
+    //############################
+    //HashMap Comparison Methods
+    //############################
+
+    @Override
+    public int hashCode(){
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object otherObj) {
+        return otherObj instanceof OrderItem && this.id == ((OrderItem) otherObj).id;
     }
 
     //############################

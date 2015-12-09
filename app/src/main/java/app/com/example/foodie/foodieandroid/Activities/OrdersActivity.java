@@ -41,6 +41,17 @@ public class OrdersActivity extends AppCompatActivity implements IOrderCallback 
         Toast.makeText(this, responseString, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void findAllOrdersCb(ArrayList<Order> orders) {
+        this.orders.addAll(orders);
+        this.ordersAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void findAllOrdersCb(String responseString) {
+        Toast.makeText(this, responseString, Toast.LENGTH_SHORT).show();
+    }
+
     //############################
     //AppCompatActivity methods
     //############################
@@ -78,7 +89,8 @@ public class OrdersActivity extends AppCompatActivity implements IOrderCallback 
     //############################
 
     public List<Order> fetchOrders() {
-        OrderDAO.findById(1, this);
+        //OrderDAO.findById(1, this);
+        OrderDAO.findAll(this);
 
         List<Order> orders = new ArrayList<Order>();
 

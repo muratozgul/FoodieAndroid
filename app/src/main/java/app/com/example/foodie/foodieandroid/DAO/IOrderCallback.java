@@ -1,5 +1,7 @@
 package app.com.example.foodie.foodieandroid.DAO;
 
+import java.util.ArrayList;
+
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 
 /**
@@ -9,5 +11,8 @@ public interface IOrderCallback {
 
     public void findOrderByIdCb(Order order);
     public void findOrderByIdCb(String responseString);
+
+    public void findAllOrdersCb(ArrayList<Order> orders);
+    public void findAllOrdersCb(String responseString);
 
 }

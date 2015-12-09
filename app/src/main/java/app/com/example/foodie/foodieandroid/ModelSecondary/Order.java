@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,11 +16,22 @@ import app.com.example.foodie.foodieandroid.Model.Dish;
 public class Order implements Parcelable{
     private static final String TAG = "Order";
 
+    @SerializedName("id")
     private int id;
+
+    @SerializedName("user_id")
     private int user_id;
+
+    @SerializedName("chef_id")
     private int chef_id;
+
+    @SerializedName("createdAt")
     private String time_stamp;
+
+    @SerializedName("orderItems")
     private ArrayList<OrderItem> orderItems;
+
+    @SerializedName("price")
     private double total_price;
 
     //############################
@@ -173,6 +186,20 @@ public class Order implements Parcelable{
         ArrayList<OrderItem> tempList = new ArrayList<OrderItem>();
         in.readTypedList(tempList, OrderItem.CREATOR); // OrderItem.class.getClassLoader()
         this.orderItems = tempList;
+    }
+
+    //############################
+    //HashMap Comparison Methods
+    //############################
+
+    @Override
+    public int hashCode(){
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object otherObj) {
+        return otherObj instanceof Order && this.id == ((Order) otherObj).id;
     }
 
     //############################
