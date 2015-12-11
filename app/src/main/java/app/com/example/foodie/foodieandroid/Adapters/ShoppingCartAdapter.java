@@ -16,7 +16,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import app.com.example.foodie.foodieandroid.Helpers.ShoppingCart;
 import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 import app.com.example.foodie.foodieandroid.R;
 
