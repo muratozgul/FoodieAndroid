@@ -134,13 +134,13 @@ public class HomeActivity extends AppCompatActivity implements
 
         // TODO: Review History
         else if (id == R.id.nav_review) {
-            Toast.makeText(getApplicationContext(), "This will display review history!",
+            Toast.makeText(getApplicationContext(), "Sorry, you're not supposed to see this, we're working on it - Review History",
                     Toast.LENGTH_SHORT).show();
         }
 
         // TODO: User settings
         else if (id == R.id.nav_settings) {
-            Toast.makeText(getApplicationContext(), "This will display settings!",
+            Toast.makeText(getApplicationContext(), "Sorry, you're not supposed to see this, we're working on it - Settings",
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -184,6 +184,7 @@ public class HomeActivity extends AppCompatActivity implements
                 break;
             case R.id.dish_list:
                 Intent dishMenuActivity = new Intent(this, DishMenuActivity.class);
+                dishMenuActivity.putExtra("source", "menu");
                 startActivity(dishMenuActivity);
                 break;
             case R.id.categories:

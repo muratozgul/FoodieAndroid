@@ -1,6 +1,8 @@
 package app.com.example.foodie.foodieandroid.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -94,6 +97,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
                     public void onCommentButtonClick(Button callerButton, int position) {
                         Toast.makeText(view.getContext(), "Comment Button Clicked " + Integer.toString(position),
                                 Toast.LENGTH_SHORT).show();
+                        showReviewDialog();
                     }
                 });
 
@@ -119,5 +123,34 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
     @Override
     public int getItemCount() {
         return this.orderItems.size();
+    }
+
+    protected void showReviewDialog() {
+
+        // get prompts.xml view
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View promptView = layoutInflater.inflate(R.layout.dialog_write_review, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder.setView(promptView);
+
+        final RatingBar ratingBar = (RatingBar) promptView.findViewById(R.id.reviewRating);
+        final EditText editText = (EditText) promptView.findViewById(R.id.reviewTextEdit);
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(context, "Review you left: \n" + ratingBar.getRating() + " stars\n" + editText.getText().toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 }

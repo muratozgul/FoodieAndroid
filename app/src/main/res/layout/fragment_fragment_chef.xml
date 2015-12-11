@@ -15,11 +15,13 @@
             android:id="@+id/chefImg"
             android:layout_width="@dimen/thumbnail_width"
             android:layout_height="@dimen/thumbnail_height"
+            android:padding="6dp"
             android:src="@drawable/chef" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
             android:orientation="vertical">
 
             <TextView

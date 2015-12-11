@@ -32,6 +32,53 @@ public class DishDAO {
     //API GET methods
     //############################
 
+    public static void findCategoryById(int id, final IDishCallback cbInterface) {
+        // Build url
+        StringBuilder sb = new StringBuilder();
+        sb.append(restApiBaseUrl);
+        sb.append(dishUrl);
+        sb.append("/category/");
+        switch (id){
+            case 1:
+                sb.append("Chinese");
+                break;
+            case 2:
+                sb.append("Vegetarian");
+                break;
+            case 3:
+                sb.append("Desserts");
+                break;
+            case 4:
+                sb.append("Meatlover");
+                break;
+        }
+        String url = sb.toString();
+
+        // Create new response listener
+        Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d(TAG, response.toString());
+                cbInterface.findDishesByCategory(parseGsonArray(response));
+            }
+        };
+
+        // Create new response error listener
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "Object findAll Error: " + error.getMessage());
+            }
+        };
+
+        // Make JSON Array request
+        JsonArrayRequest jsonArrReq = new JsonArrayRequest(url, responseListener, errorListener);
+
+        // Add request to (global) request queue
+        FoodieApp.getInstance().addToRequestQueue(jsonArrReq, TAG);
+    }
+
+
     // Return single Dish by dish-id
     public static void findById(int id, final IDishCallback cbInterface) {
         // Build url

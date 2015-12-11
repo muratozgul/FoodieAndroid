@@ -144,12 +144,13 @@ public class CheckoutActivity extends AppCompatActivity implements IOrderCallbac
         creatingOrderDialog = ProgressDialog.show(this, "Sending Order", "Please wait...", true);
     }
 
-    protected void rePopulateAdapter(){
+    public void rePopulateAdapter(){
+
         this.cartItemsAdapter.setOrderItems(FoodieApp.getCart().getItemsAsList());
         this.cartItemsAdapter.notifyDataSetChanged();
     }
 
-    protected void refreshSummary(){
+    public void refreshSummary(){
         itemCountView.setText("Items in cart: " + FoodieApp.getCart().size());
         NumberFormat formatter = new DecimalFormat("#0.00");
         String priceString = formatter.format(FoodieApp.getCart().getTotalCost());
