@@ -89,13 +89,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 new OrderAdapter.OrderViewHolder.IOrderViewHolderClicks() {
                     public void onCardClick(View caller, int position) {
                         Order order = getOrder(position);
-                        Toast.makeText(view.getContext(), "(Adapter) Card Clicked: " + order.toString(),
-                                Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(view.getContext(), "(Adapter) Card Clicked: " + order.toString(),
+                        //        Toast.LENGTH_SHORT).show();
                     }
                     public void onDetailsButtonClick(Button callerButton, int position) {
                         Order order = getOrder(position);
-                        Toast.makeText(view.getContext(), "(Adapter) Details Button Clicked " + Integer.toString(position),
-                                Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(view.getContext(), "(Adapter) Details Button Clicked " + Integer.toString(position),
+                        //        Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(context, OrderDetailsActivity.class);
                         intent.putExtra("order", order);

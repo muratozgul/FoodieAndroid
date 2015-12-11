@@ -34,10 +34,6 @@ public class OrderDetailsActivity extends AppCompatActivity {
         order = (Order) intent.getParcelableExtra("order");
         orderItems = order.getOrderItems();
 
-
-        //order = fetchOrder();
-        //orderItems = fetchOrderItems();
-
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

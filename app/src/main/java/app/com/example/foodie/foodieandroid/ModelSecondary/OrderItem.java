@@ -12,10 +12,10 @@ public class OrderItem implements Parcelable {
     @SerializedName("id")
     private int id;
 
-    @SerializedName("order_id")
+    @SerializedName("orderId")
     private int order_id;
 
-    @SerializedName("dish_id")
+    @SerializedName("dishId")
     private int dish_id;
 
     @SerializedName("quantity")

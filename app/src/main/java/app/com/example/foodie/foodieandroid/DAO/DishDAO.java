@@ -27,7 +27,7 @@ import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 public class DishDAO {
     private static final String TAG = "DishDAO";
     private static String restApiBaseUrl = FoodieApp.getApiUrl();
-    private static String orderUrl = "/dish";
+    private static String orderUrl = "/dishes";
 
     //############################
     //API GET methods
@@ -48,7 +48,7 @@ public class DishDAO {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
-                cbInterface.findDishByIdCb(response.toString());
+                //cbInterface.findDishByIdCb(response.toString());
                 cbInterface.findDishByIdCb(parseGsonObject(response));
             }
         };
@@ -82,7 +82,7 @@ public class DishDAO {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(TAG, response.toString());
-                cbInterface.findAllDishesCb(response.toString());
+                //cbInterface.findAllDishesCb(response.toString());
                 cbInterface.findAllDishesCb(parseGsonArray(response));
             }
         };

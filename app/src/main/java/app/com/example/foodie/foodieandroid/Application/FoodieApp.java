@@ -18,7 +18,8 @@ public class FoodieApp extends Application {
     private static FoodieApp singleton;
     private static RequestQueue mRequestQueue;
 
-    private static final String restApiUrl = "http://ec2-52-90-154-59.compute-1.amazonaws.com:8080";
+    //private static final String restApiUrl = "http://ec2-52-90-154-59.compute-1.amazonaws.com:8080";
+    private static final String restApiUrl = "http://54.67.14.75:8080/foodie";
 
     //############################
     //Getters

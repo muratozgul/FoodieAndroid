@@ -106,11 +106,11 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
         String quantity = Integer.toString(oi.getQuantity()) + "x";
 
         oivh.quantityView.setText(quantity);
-        oivh.nameView.setText("Double CheeseBurger");
-        oivh.priceView.setText("$24.50");
-        //oivh.imageView.setImageDrawable(imageId);
-        oivh.ratingBar.setRating(3.5f);
-        //oivh.commentButton.setText("Comment");
+        oivh.nameView.setText(Integer.toString(oi.getDish_id()));
+        oivh.priceView.setText("$"+Double.toString(oi.getTotalPrice()));
+
+        oivh.ratingBar.setRating(3);
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
