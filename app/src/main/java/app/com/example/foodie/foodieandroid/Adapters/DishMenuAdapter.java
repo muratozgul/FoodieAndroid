@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Activities.DishDetailActivity;
+import app.com.example.foodie.foodieandroid.Activities.DishMenuActivity;
 import app.com.example.foodie.foodieandroid.Activities.OrderDetailsActivity;
 import app.com.example.foodie.foodieandroid.Application.FoodieApp;
 import app.com.example.foodie.foodieandroid.Model.Dish;
@@ -99,6 +100,7 @@ public class DishMenuAdapter extends RecyclerView.Adapter<DishMenuAdapter.DishVi
                     public void onAddButtonClick(Button callerButton, int position) {
                         Dish dish = getDish(position);
                         FoodieApp.getInstance().getCart().addOne(dish);
+                        ((DishMenuActivity)context).updateCartIcon();
                         Toast.makeText(view.getContext(), dish.getName() + " added to cart",
                                 Toast.LENGTH_SHORT).show();
                     }

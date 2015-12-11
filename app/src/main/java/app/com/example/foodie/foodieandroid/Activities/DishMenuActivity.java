@@ -1,5 +1,6 @@
 package app.com.example.foodie.foodieandroid.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class DishMenuActivity extends AppCompatActivity implements IDishCallback
     private RecyclerView.LayoutManager dishMenuLayoutManager;
     private List<Dish> dishes = new ArrayList<Dish>();
     private TextView checkoutButton;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class DishMenuActivity extends AppCompatActivity implements IDishCallback
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Menu");
+
+        context = this;
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -59,7 +63,7 @@ public class DishMenuActivity extends AppCompatActivity implements IDishCallback
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_checkout, menu);
 
-        final View checkout = menu.findItem(R.id.checkout).getActionView();
+        View checkout = menu.findItem(R.id.checkout).getActionView();
         checkoutButton = (TextView) checkout.findViewById(R.id.cart_qty);
 
         int cartSize = FoodieApp.getInstance().getCart().size();
@@ -69,12 +73,16 @@ public class DishMenuActivity extends AppCompatActivity implements IDishCallback
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(checkout.getContext(), CheckoutActivity.class);
-                checkout.getContext().startActivity(intent);
+                Intent intent = new Intent(context, CheckoutActivity.class);
+                context.startActivity(intent);
             }
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void updateCartIcon(){
+        checkoutButton.setText(Integer.toString(FoodieApp.getInstance().getCart().size()));
     }
 
     @Override

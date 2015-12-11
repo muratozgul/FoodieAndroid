@@ -114,7 +114,7 @@ public class ShoppingCart {
 
     public Order checkout(){
         Order order = new Order(this.contents);
-        this.empty();
+        //this.empty();
         return order;
     }
 

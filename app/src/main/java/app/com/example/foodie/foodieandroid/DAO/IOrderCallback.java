@@ -15,4 +15,6 @@ public interface IOrderCallback {
     public void findAllOrdersCb(ArrayList<Order> orders);
     public void findAllOrdersCb(String responseString);
 
+    public void createOrderCb(String responseString);
+
 }

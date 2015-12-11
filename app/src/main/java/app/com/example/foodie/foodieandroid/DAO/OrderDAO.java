@@ -2,6 +2,7 @@ package app.com.example.foodie.foodieandroid.DAO;
 
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -12,15 +13,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import app.com.example.foodie.foodieandroid.Application.FoodieApp;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
+import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 
 /**
  * Created by muratozgul on 07/12/15.
@@ -45,6 +50,14 @@ public class OrderDAO {
     }
 
     public static String getOrdersUrl(){
+        // Build url
+        StringBuilder sb = new StringBuilder();
+        sb.append(restApiBaseUrl);
+        sb.append(orderUrl);
+        return sb.toString();
+    }
+
+    public static String postOrderUrl(){
         // Build url
         StringBuilder sb = new StringBuilder();
         sb.append(restApiBaseUrl);
@@ -185,6 +198,58 @@ public class OrderDAO {
 
         // Add request to (global) request queue
         FoodieApp.getInstance().addToRequestQueue(gsonRequest, TAG);
+    }
+
+    //############################
+    //API POST methods
+    //############################
+
+    public static void create(Order order, final IOrderCallback cbInterface) throws JSONException {
+        // Build url
+        String url = getOrdersUrl();
+
+        // Build req
+        ArrayList<OrderItem> orderItems = order.getOrderItems();
+        JSONArray jsOrderItemsArr = new JSONArray();
+
+        for (int i=0; i < orderItems.size(); i++){
+            OrderItem orderItem = orderItems.get(i);
+            JSONObject jsOrderItem = new JSONObject();
+            jsOrderItem.put("quantity", orderItem.getQuantity());
+            jsOrderItem.put("dishId", orderItem.getDish_id());
+            jsOrderItem.put("price", orderItem.calculatePrice());
+            jsOrderItemsArr.put(jsOrderItem);
+        }
+
+        JSONObject jsOrder = new JSONObject();
+        jsOrder.put("userId", FoodieApp.getAppUserId());
+        jsOrder.put("items", jsOrderItemsArr);
+
+        // Create new response listener
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, "Order created");
+                Log.d(TAG, response.toString());
+                cbInterface.createOrderCb(response.toString());
+            }
+        };
+
+        // Create new response error listener
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "Order create Error: " + error.getMessage());
+            }
+        };
+
+        // Make POST request
+        JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, jsOrder, responseListener, errorListener);
+        Log.d(TAG, "Json sent:");
+        Log.d(TAG, jsOrder.toString());
+
+        // Add request to (global) request queue
+        FoodieApp.getInstance().addToRequestQueue(jsonObjRequest, TAG);
     }
 
     //############################

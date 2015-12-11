@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 import app.com.example.foodie.foodieandroid.R;
 
@@ -94,8 +95,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         CartItemViewHolder oivh = new CartItemViewHolder(view,
                 new ShoppingCartAdapter.CartItemViewHolder.ICartItemViewHolderClicks() {
                     public void onRatingBarClick(RatingBar callerRatingBar, int position) {
-                        Toast.makeText(view.getContext(), "Rating Bar Clicked " + Integer.toString(position),
-                                Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(view.getContext(), "Rating Bar Clicked " + Integer.toString(position),
+                        //        Toast.LENGTH_SHORT).show();
                     }
                     public void onRemoveButtonClick(Button callerButton, int position) {
                         Toast.makeText(view.getContext(), "Comment Button Clicked " + Integer.toString(position),
@@ -127,4 +128,5 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public int getItemCount() {
         return this.orderItems.size();
     }
+
 }

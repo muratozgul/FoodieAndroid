@@ -78,7 +78,7 @@ public class Order implements Parcelable{
 
             double price = quantity*dish.getPrice();
 
-            this.orderItems.add(new OrderItem(dish.getDish_id(), quantity, price));
+            this.orderItems.add(new OrderItem(dish, quantity, price));
             this.total_price += price;
         }
     }

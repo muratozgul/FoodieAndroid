@@ -62,6 +62,11 @@ public class OrdersActivity extends AppCompatActivity implements IOrderCallback 
         Toast.makeText(this, responseString, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void createOrderCb(String responseString) {
+
+    }
+
     //############################
     //AppCompatActivity methods
     //############################

@@ -17,6 +17,7 @@ public class FoodieApp extends Application {
     public static final String TAG = "FoodieApp";
     private static FoodieApp singleton;
     private static RequestQueue mRequestQueue;
+    private static int appUserId = 101;
 
     //private static final String restApiUrl = "http://ec2-52-90-154-59.compute-1.amazonaws.com:8080";
     private static final String restApiUrl = "http://54.67.14.75:8080/foodie";
@@ -35,6 +36,14 @@ public class FoodieApp extends Application {
 
     public static String getApiUrl() {
         return restApiUrl;
+    }
+
+    public static int getAppUserId() {
+        return appUserId;
+    }
+
+    public static void setAppUserId(int appUserId) {
+        FoodieApp.appUserId = appUserId;
     }
 
     //############################
@@ -64,7 +73,6 @@ public class FoodieApp extends Application {
 
     //############################
     //Volley methods
-    // http://www.androidhive.info/2014/09/android-json-parsing-using-volley/
     //############################
 
     public RequestQueue getRequestQueue() {

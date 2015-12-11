@@ -1,6 +1,7 @@
 package app.com.example.foodie.foodieandroid.Activities;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -12,11 +13,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import org.json.JSONException;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -26,11 +30,14 @@ import java.util.List;
 import app.com.example.foodie.foodieandroid.Adapters.OrderItemAdapter;
 import app.com.example.foodie.foodieandroid.Adapters.ShoppingCartAdapter;
 import app.com.example.foodie.foodieandroid.Application.FoodieApp;
+import app.com.example.foodie.foodieandroid.DAO.IOrderCallback;
+import app.com.example.foodie.foodieandroid.DAO.OrderDAO;
+import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 import app.com.example.foodie.foodieandroid.R;
 import app.com.example.foodie.foodieandroid.Sensors.ShakeDetector;
 
-public class CheckoutActivity extends AppCompatActivity {
+public class CheckoutActivity extends AppCompatActivity implements IOrderCallback {
     private static final String TAG = "CheckoutActivity";
     private RecyclerView cartItemsRecyclerView;
     //private RecyclerView.Adapter cartItemsAdapter;
@@ -42,6 +49,8 @@ public class CheckoutActivity extends AppCompatActivity {
     private TextView itemCountView;
     private TextView totalPriceView;
     private Toast currentToast;
+
+    private ProgressDialog creatingOrderDialog;
 
     // The following are used for the shake detection
     private SensorManager mSensorManager;
@@ -92,6 +101,13 @@ public class CheckoutActivity extends AppCompatActivity {
         cartItemsAdapter = new ShoppingCartAdapter(orderItems, this);
         cartItemsRecyclerView.setAdapter(cartItemsAdapter);
 
+        // bind click event to place order button
+        placeOrderButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                createOrder();
+            }
+        });
+
     }
 
     @Override
@@ -113,6 +129,19 @@ public class CheckoutActivity extends AppCompatActivity {
         // Add the following line to unregister the Sensor Manager onPause
         mSensorManager.unregisterListener(mShakeDetector);
         super.onPause();
+    }
+
+    protected void createOrder(){
+        Order order = FoodieApp.getCart().checkout();
+        try {
+            OrderDAO.create(order, this);
+        } catch (JSONException e) {
+            Log.d(TAG, "Order create ERROR");
+            creatingOrderDialog.dismiss();
+            showToast("Something went wrong. Please retry.");
+            e.printStackTrace();
+        }
+        creatingOrderDialog = ProgressDialog.show(this, "Sending Order", "Please wait...", true);
     }
 
     protected void rePopulateAdapter(){
@@ -163,4 +192,37 @@ public class CheckoutActivity extends AppCompatActivity {
         }
     }
 
+    //############################
+    //IOrderCallback Interface Methods
+    //############################
+
+
+    @Override
+    public void createOrderCb(String responseString) {
+        creatingOrderDialog.dismiss();
+        showToast("Order created");
+        FoodieApp.getCart().empty();
+        rePopulateAdapter();
+        refreshSummary();
+    }
+
+    @Override
+    public void findOrderByIdCb(Order order) {
+
+    }
+
+    @Override
+    public void findOrderByIdCb(String responseString) {
+
+    }
+
+    @Override
+    public void findAllOrdersCb(ArrayList<Order> orders) {
+
+    }
+
+    @Override
+    public void findAllOrdersCb(String responseString) {
+
+    }
 }
