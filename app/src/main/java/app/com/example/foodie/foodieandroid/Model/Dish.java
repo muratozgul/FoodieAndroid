@@ -1,5 +1,8 @@
 package app.com.example.foodie.foodieandroid.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -8,7 +11,7 @@ import java.util.List;
 /**
  * Created by Jennifer on 11/11/15.
  */
-public class Dish {
+public class Dish implements Parcelable {
 
     @SerializedName("id")
     private int dish_id;
@@ -137,6 +140,7 @@ public class Dish {
         this.dish_img = dish_img;
     }
 
+
     // For debugging
     public String toString(){
         StringBuilder sb = new StringBuilder();
@@ -161,5 +165,51 @@ public class Dish {
     @Override
     public boolean equals(Object otherObj) {
         return otherObj instanceof Dish && this.dish_id == ((Dish) otherObj).dish_id;
+    }
+
+    //############################
+    //Parcelable Interface Methods
+    //############################
+
+    //Parcelable used for passing objects via intents
+    //Parcelable is faster than serializable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(dish_id);
+        out.writeString(name);
+        out.writeString(dish_img);
+        out.writeFloat(rating);
+        out.writeDouble(price);
+    }
+
+    // This is used to regenerate orderItem object.
+    // All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Dish> CREATOR = new Parcelable.Creator<Dish>() {
+        public Dish createFromParcel(Parcel in) {
+            return new Dish(in);
+        }
+
+        public Dish[] newArray(int size) {
+            return new Dish[size];
+        }
+    };
+
+    // constructor that takes a Parcel and gives you an object populated with it's values
+    private Dish(Parcel in) {
+        //read in the same order as writes
+        this.dish_id = in.readInt();
+        this.name = in.readString();
+        this.dish_img = in.readString();
+        this.rating = in.readFloat();
+        this.price = in.readDouble();
+
+        //not transfering these
+        this.tags = new ArrayList<String>();
+        this.chef = null;
     }
 }

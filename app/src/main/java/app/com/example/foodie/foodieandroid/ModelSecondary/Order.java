@@ -40,12 +40,6 @@ public class Order implements Parcelable{
     //############################
 
     public Order(){
-        this.id = 123;
-        this.user_id = 123;
-        this.chef_id = 123;
-        this.time_stamp = "TODAY";
-        this.orderItems = new ArrayList<OrderItem>();
-        this.total_price = 20d;
     }
 
     public Order(int id, double total_price){
@@ -225,5 +219,27 @@ public class Order implements Parcelable{
         output += " has " + Integer.toString(this.orderItems.size());
         output += " order items.";
         return output;
+    }
+
+    public double calculatePrice(){
+        double sum = 0d;
+        for (int i = 0; i < this.orderItems.size(); i++) {
+            sum += this.orderItems.get(i).calculatePrice();
+        }
+        return sum;
+    }
+
+    public String generateContentsString(){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.orderItems.size(); i++) {
+            sb.append(Integer.toString(orderItems.get(i).getQuantity()));
+            sb.append("x ");
+            sb.append(this.orderItems.get(i).getDishObject().getName());
+            if(i < this.orderItems.size()-1) {
+                sb.append("\n");
+            }
+        }
+
+        return sb.toString();
     }
 }

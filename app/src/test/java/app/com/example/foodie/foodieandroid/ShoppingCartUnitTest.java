@@ -10,6 +10,7 @@ import app.com.example.foodie.foodieandroid.Helpers.ShoppingCart;
 import app.com.example.foodie.foodieandroid.Model.Chef;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
+import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 
 import static org.junit.Assert.*;
 /**
@@ -163,5 +164,20 @@ public class ShoppingCartUnitTest {
 
         cart.addOne(dish2);
         assertEquals(7.99d, cart.getTotalCost(), 0.1d);
+    }
+
+    @Test
+    public void shouldReturnItemsAsList() throws Exception {
+        cart.addOne(dish1);
+
+        OrderItem oi1 = cart.getItemsAsList().get(0);
+
+        assertEquals(1, oi1.getDish_id());
+
+        cart.addOne(dish1);
+        assertEquals(1, cart.getItemsAsList().size());
+
+        cart.addOne(dish2);
+        assertEquals(2, cart.getItemsAsList().size());
     }
 }

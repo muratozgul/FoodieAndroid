@@ -60,7 +60,7 @@ public class ShoppingCart {
 
             double price = quantity*dish.getPrice();
 
-            items.add(new OrderItem(dish.getDish_id(), quantity, price));
+            items.add(new OrderItem(0, 0, dish.getDish_id(), quantity, dish));
         }
 
         return items;
