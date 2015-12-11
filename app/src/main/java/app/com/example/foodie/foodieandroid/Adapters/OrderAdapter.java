@@ -34,7 +34,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         public TextView orderIdView;
         public TextView orderDateView;
-        public TextView orderChefView;
         public TextView orderContentsView;
         public TextView orderPriceView;
         public Button orderDetailsButton;
@@ -49,7 +48,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             orderCardView = (CardView) itemView.findViewById(R.id.orderCard);
             orderIdView = (TextView) itemView.findViewById(R.id.orderCard_id);
             orderDateView = (TextView) itemView.findViewById(R.id.orderCard_date);
-            orderChefView = (TextView) itemView.findViewById(R.id.orderCard_chef);
             orderContentsView = (TextView) itemView.findViewById(R.id.orderCard_contents);
             orderPriceView = (TextView) itemView.findViewById(R.id.orderCard_price);
             orderDetailsButton = (Button) itemView.findViewById(R.id.orderCard_detailsButton);
@@ -111,9 +109,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(OrderViewHolder orderViewHolder, int position) {
         Order order = orders.get(position);
 
-        orderViewHolder.orderIdView.setText("Order: "+ Integer.toString(order.getId()));
-        orderViewHolder.orderDateView.setText(order.getTime_stamp());
-        orderViewHolder.orderChefView.setText("DummyChefName");
+        orderViewHolder.orderIdView.setText("Order#: "+ Integer.toString(order.getId()));
+        orderViewHolder.orderDateView.setText(order.getOrderDateString());
         orderViewHolder.orderContentsView.setText("Order Contents");
         orderViewHolder.orderPriceView.setText("Total price: " + Double.toString(order.getTotal_price()));
     }
