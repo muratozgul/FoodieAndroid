@@ -1,5 +1,9 @@
 package app.com.example.foodie.foodieandroid.Model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 import app.com.example.foodie.foodieandroid.Utility.Location;
 import app.com.example.foodie.foodieandroid.Utility.UserSettings;
 
@@ -7,19 +11,35 @@ import app.com.example.foodie.foodieandroid.Utility.UserSettings;
  * Created by Jennifer on 11/11/15.
  */
 public abstract class User {
+
+    @SerializedName("id")
     private int user_id;
+
+    @SerializedName("name")
     private String name;
+
+    @SerializedName("avatarPic")
     private String profile_img;
+
     private String username;
     private String password;
     private UserSettings settings;
     private Location location;
+
+    //############################
+    //Constructors
+    //############################
 
     public User(int user_id, String name, String profile_img) {
         this.user_id = user_id;
         this.name = name;
         this.profile_img = profile_img;
     }
+
+    public User(){};
+    //############################
+    //Getters & Setters
+    //############################
 
     public int getUser_id() {
         return user_id;
@@ -75,5 +95,18 @@ public abstract class User {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    //############################
+    //HashMap Comparison Methods
+    //############################
+    @Override
+    public int hashCode(){
+        return user_id;
+    }
+
+    @Override
+    public boolean equals(Object otherObj) {
+        return otherObj instanceof User && this.user_id == ((User) otherObj).user_id;
     }
 }

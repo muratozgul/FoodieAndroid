@@ -1,5 +1,7 @@
 package app.com.example.foodie.foodieandroid.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,20 +15,59 @@ import app.com.example.foodie.foodieandroid.Utility.Rating;
  */
 public class Chef extends User {
 
+    @SerializedName("score")
     private float rating;
-    private int num_of_dishes;
-    private List<String> tags;
-    private ArrayList<Dish> dishes;
-    private ArrayList<Review> reviews;
 
-    //NOT USED FIELD!!!
-    private Menu menu;
-    private Inventory inventory;
-    private ArrayList<Order> orders;
+    @SerializedName("numOfDishes")
+    private int num_of_dishes;
+
+    @SerializedName("tags")
+    private List<String> tags;
+
+    @SerializedName("dishes")
+    private ArrayList<Dish> dishes;
+
+//    private ArrayList<Review> reviews;
+//
+//    //TODO:NOT USED FIELD!!!
+//    private Menu menu;
+//    private Inventory inventory;
+//    private ArrayList<Order> orders;
+
+    //############################
+    //Constructors
+    //############################
+
+
+    public Chef(int user_id, String name, String profile_img, float rating, int num_of_dishes, List<String> tags, ArrayList<Dish> dishes) {
+        super(user_id, name, profile_img);
+        this.rating = rating;
+        this.num_of_dishes = num_of_dishes;
+        this.tags = tags;
+        this.dishes = dishes;
+    }
+
+    public Chef(int user_id, String name, String profile_img, ArrayList<Dish> dishes) {
+        super(user_id, name, profile_img);
+        this.dishes = dishes;
+    }
+
+    public Chef(int user_id, String name, String profile_img, float rating, int num_of_dishes, List<String> tags) {
+        super(user_id, name, profile_img);
+        this.rating = rating;
+        this.num_of_dishes = num_of_dishes;
+        this.tags = tags != null ? tags : new ArrayList<String>();
+    }
 
     public Chef(int user_id, String name, String profile_img) {
         super(user_id, name, profile_img);
     }
+
+    public Chef(){};
+
+    //############################
+    //Getters & Setters
+    //############################
 
     public int getNum_of_dishes() {
         return num_of_dishes;
@@ -50,44 +91,12 @@ public class Chef extends User {
         this.tags = tags;
     }
 
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
-
     public float getRating() {
         return rating;
     }
 
     public void setRating(float rating) {
         this.rating = rating;
-    }
-
-    public ArrayList<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(ArrayList<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public ArrayList<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(ArrayList<Order> orders) {
-        this.orders = orders;
     }
 
     public int getNumOfDishes() {

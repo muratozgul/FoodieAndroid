@@ -25,10 +25,10 @@
         android:layout_height="200dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <fragment
-        android:id="@+id/reviewFragment"
-        class="app.com.example.foodie.foodieandroid.Fragments.FragmentReviews"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <!--<fragment-->
+        <!--android:id="@+id/reviewFragment"-->
+        <!--class="app.com.example.foodie.foodieandroid.Fragments.FragmentReviews"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
 
 </LinearLayout>

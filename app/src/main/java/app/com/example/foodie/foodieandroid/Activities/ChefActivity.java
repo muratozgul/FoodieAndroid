@@ -7,20 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Adapters.ChefAdapter;
+import app.com.example.foodie.foodieandroid.DAO.ChefDAO;
+import app.com.example.foodie.foodieandroid.DAO.IChefCallback;
 import app.com.example.foodie.foodieandroid.Model.Chef;
 import app.com.example.foodie.foodieandroid.R;
 
-public class ChefActivity extends AppCompatActivity{
+public class ChefActivity extends AppCompatActivity implements IChefCallback{
     private RecyclerView chefRV;
     private RecyclerView.Adapter chefAdapter;
     private RecyclerView.LayoutManager chefLayoutManager;
     private List<Chef> chefs;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,41 @@ public class ChefActivity extends AppCompatActivity{
 
         chefAdapter = new ChefAdapter(chefs);
         chefRV.setAdapter(chefAdapter);
+
+        fetchChefsFromServer();
+    }
+
+    //############################
+    //Fetch data from server
+    //############################
+    public void fetchChefsFromServer() {
+        ChefDAO.findAll(this);
+    }
+
+    //############################
+    //IChefCallback Interface Methods
+    //############################
+
+    @Override
+    public void findChefByIdCb(Chef chef) {
+        this.chefs.add(chef);
+        this.chefAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void findChefByIdCb(String responseString) {
+        Toast.makeText(this, responseString, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void findAllChefsCb(ArrayList<Chef> chefs) {
+        this.chefs.addAll(chefs);
+        this.chefAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void findAllChefsCb(String responseString) {
+        Toast.makeText(this, responseString, Toast.LENGTH_SHORT).show();
     }
 
     public void addChef(){

@@ -12,12 +12,6 @@
         layout="@layout/app_bar_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <!--<FrameLayout-->
-        <!--android:id="@+id/content_frame"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" >-->
-        <!--&lt;!&ndash; Put what you want as your normal screen in here, you can also choose for a linear layout or any other layout, whatever you prefer &ndash;&gt;-->
-    <!--</FrameLayout>-->
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -25,7 +19,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_home"
         app:menu="@menu/activity_home_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

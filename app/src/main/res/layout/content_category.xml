@@ -1,65 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_category"
-    tools:context="app.com.example.foodie.foodieandroid.Activities.CategoryActivity">
+    tools:context="app.com.example.foodie.foodieandroid.Activities.CategoryActivity"
+    tools:showIn="@layout/activity_category">
 
-    <Button
-        android:layout_width="fill_parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cat_vegetarian"
-        android:id="@+id/cat_button_1"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:paddingTop="40dp">
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cat_gluten_free"
-        android:id="@+id/cat_button_2"
-        android:layout_below="@+id/cat_button_1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        <ImageView
+            android:id="@+id/cat_chinese"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/s_chinese" />
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cat_chinese"
-        android:id="@+id/cat_button_3"
-        android:layout_below="@+id/cat_button_2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/cat_chinese"
+            android:background="@drawable/gradient_background"
+            android:padding="6dp"
+            android:text="Chinese"
+            android:textColor="#ffffff"
+            android:textSize="40dp"
+            android:textStyle="italic" />
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cat_american"
-        android:id="@+id/cat_button_4"
-        android:layout_below="@+id/cat_button_3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+    </RelativeLayout>
 
-    <Button
-        android:layout_width="fill_parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cat_bakery"
-        android:id="@+id/cat_button_5"
-        android:layout_below="@+id/cat_button_4"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:paddingTop="10dp">
 
-    <Button
-        android:layout_width="fill_parent"
+        <ImageView
+            android:id="@+id/cat_vegetarian"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/s_vegetarian" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/cat_vegetarian"
+            android:background="@drawable/gradient_background"
+            android:padding="6dp"
+            android:text="Vegetarian"
+            android:textColor="#ffffff"
+            android:textSize="40dp"
+            android:textStyle="italic" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cat_japanese"
-        android:id="@+id/cat_button_6"
-        android:layout_below="@+id/cat_button_5"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
-</RelativeLayout>
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/cat_sweets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/s_sweets" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/cat_sweets"
+            android:background="@drawable/gradient_background"
+            android:padding="6dp"
+            android:text="Desserts"
+            android:textColor="#ffffff"
+            android:textSize="40dp"
+            android:textStyle="italic" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/cat_meatlover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/s_meatlover" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/cat_meatlover"
+            android:background="@drawable/gradient_background"
+            android:padding="6dp"
+            android:text="Meatlover"
+            android:textColor="#ffffff"
+            android:textSize="40dp"
+            android:textStyle="italic" />
+    </RelativeLayout>
+
+</LinearLayout>

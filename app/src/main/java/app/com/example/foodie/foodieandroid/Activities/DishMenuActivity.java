@@ -79,7 +79,7 @@ public class DishMenuActivity extends AppCompatActivity implements IDishCallback
     }
 
     //############################
-    //IOrderCallback Interface Methods
+    //IDishCallback Interface Methods
     //############################
 
     @Override

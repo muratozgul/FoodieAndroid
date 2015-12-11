@@ -2,26 +2,38 @@ package app.com.example.foodie.foodieandroid.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewStub;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Adapters.ChefAdapter;
 import app.com.example.foodie.foodieandroid.Adapters.DishMenuAdapter;
+import app.com.example.foodie.foodieandroid.DAO.ChefDAO;
+import app.com.example.foodie.foodieandroid.DAO.DishDAO;
+import app.com.example.foodie.foodieandroid.DAO.IChefCallback;
 import app.com.example.foodie.foodieandroid.Model.Chef;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.R;
 
-public class ChefDetailActivity extends AppCompatActivity {
-    private Chef chef;
-    private List<Dish> chefDishes;
+public class ChefDetailActivity extends AppCompatActivity implements IChefCallback {
+
+    private Chef chef = new Chef();
+    private List<Dish> chefDishes = new ArrayList<Dish>();
     private RecyclerView chefDishRV;
     private RecyclerView.Adapter chefDishAdapter;
     private RecyclerView.LayoutManager chefDishLayoutManager;
@@ -35,11 +47,12 @@ public class ChefDetailActivity extends AppCompatActivity {
 
         Intent dishIntent = getIntent();
         int chef_id = dishIntent.getIntExtra("chef_id", 1);
+        Log.e("ChefDetaiActivity", "CHEF_ID: " + Integer.toString(chef_id));
 
         findChef(chef_id);
-        addDish();
+        //addDish();
 
-        getSupportActionBar().setTitle(chef.getName());
+        fetchChefFromServer(chef_id);
 
         chefDishRV = (RecyclerView) findViewById(R.id.chefDishRecycler);
         chefDishRV.setHasFixedSize(true);
@@ -50,7 +63,38 @@ public class ChefDetailActivity extends AppCompatActivity {
         chefDishAdapter = new DishMenuAdapter(chefDishes);
         chefDishRV.setAdapter(chefDishAdapter);
 
+        getSupportActionBar().setTitle(chef.getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void fetchChefFromServer(int id) {
+        ChefDAO.findById(id, this);
+    }
+
+    //############################
+    //IChefCallback Interface Methods
+    //############################
+
+    @Override
+    public void findChefByIdCb(Chef chef) {
+        this.chef = chef;
+        this.chefDishes = chef.getDishes();
+        this.chefDishAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void findChefByIdCb(String responseString) {
+        Toast.makeText(this, responseString, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void findAllChefsCb(ArrayList<Chef> chefs) {
+
+    }
+
+    @Override
+    public void findAllChefsCb(String responseString) {
+
     }
 
     public void findChef(int id){

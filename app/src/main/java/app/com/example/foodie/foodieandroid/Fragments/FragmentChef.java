@@ -22,6 +22,7 @@ import app.com.example.foodie.foodieandroid.R;
 
 public class FragmentChef extends Fragment {
     int dish_id;
+    int chef_id;
     private Chef chef;
     private ImageView chefImg;
     private TextView chefName;
@@ -42,6 +43,7 @@ public class FragmentChef extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dish_id = getActivity().getIntent().getIntExtra("dish_id", 23);
+        chef_id = getActivity().getIntent().getIntExtra("chef_id", 23);
     }
 
     @Override

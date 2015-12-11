@@ -7,50 +7,48 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Application.FoodieApp;
-import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
+import app.com.example.foodie.foodieandroid.Model.Chef;
 
 /**
- * Created by muratozgul on 07/12/15.
+ * Created by Jennifer on 12/8/15.
  */
-public class OrderDAO {
-    private static final String TAG = "OrderDAO";
+
+
+public class ChefDAO {
+    public static final String TAG = "ChefDAO";
     private static String restApiBaseUrl = FoodieApp.getApiUrl();
-    private static String orderUrl = "/order";
+    private static String chefUrl = "/chefs";
 
     //############################
     //API GET methods
     //############################
 
-    // Return single Order by order-id
-    public static void findById(int id, final IOrderCallback cbInterface) {
-        // Build url
+    public static void findById(int id, final IChefCallback cbInterface) {
+        //Build url
         StringBuilder sb = new StringBuilder();
         sb.append(restApiBaseUrl);
-        sb.append(orderUrl);
+        sb.append(chefUrl);
         sb.append("/");
         sb.append(Integer.toString(id));
         String url = sb.toString();
 
-        // Create new response listener
+        //Create new response listener
         Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
-                cbInterface.findOrderByIdCb(response.toString());
-                cbInterface.findOrderByIdCb(parseGsonObject(response));
+                cbInterface.findChefByIdCb(parseGsonObject(response));
             }
         };
 
@@ -58,7 +56,7 @@ public class OrderDAO {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "Order findById Error: " + error.getMessage());
+                Log.d(TAG, "Chef findById Error: " + error.getMessage());
             }
         };
 
@@ -70,21 +68,19 @@ public class OrderDAO {
         FoodieApp.getInstance().addToRequestQueue(jsonObjReq, TAG);
     }
 
-    // Return all Orders
-    public static void findAll(final IOrderCallback cbInterface) {
-        // Build url
+    public static void findAll(final IChefCallback cbInterface) {
+        //Build url
         StringBuilder sb = new StringBuilder();
         sb.append(restApiBaseUrl);
-        sb.append(orderUrl);
+        sb.append(chefUrl);
         String url = sb.toString();
 
-        // Create new response listener
+        //Create new response listener
         Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d(TAG, response.toString());
-                cbInterface.findAllOrdersCb(response.toString());
-                cbInterface.findAllOrdersCb(parseGsonArray(response));
+                cbInterface.findAllChefsCb(parseGsonArray(response));
             }
         };
 
@@ -107,29 +103,24 @@ public class OrderDAO {
     //JSON parsing methods
     //############################
 
-    public static Order parseGsonObject(JSONObject jsonObject){
-        Order order = null;
-
+    public static Chef parseGsonObject(JSONObject jsonObject){
+        Chef chef = null;
         Gson gson = new Gson();
 
         //convert the json string back to object
-        order = gson.fromJson(jsonObject.toString(), Order.class);
-        Log.d(TAG, "Order parseGsonObject: " + order.toString());
+        chef = gson.fromJson(jsonObject.toString(), Chef.class);
+        Log.d(TAG, "Chef parseGsonObject: " + chef.toString());
 
-        return order;
+        return chef;
     }
 
-    public static ArrayList<Order> parseGsonArray(JSONArray jsonArray){
-        //ArrayList<Order> orders = new ArrayList<Order>();
-
+    public static ArrayList<Chef> parseGsonArray(JSONArray jsonArray){
         Gson gson = new Gson();
-        //ToDo
-        Type listType = new TypeToken<List<Order>>() {}.getType();
-        ArrayList<Order> orders = (ArrayList<Order>) gson.fromJson(jsonArray.toString(), listType);
-        //orders = gson.fromJson(jsonArray, Order.class);
 
-        Log.d(TAG, "Order parseGsonArray: size:" + orders.size());
+        Type listType = new TypeToken<List<Chef>>() {}.getType();
+        ArrayList<Chef> chefs = (ArrayList<Chef>) gson.fromJson(jsonArray.toString(), listType);
+        Log.d(TAG, "Chef parseGsonArray: size:" + chefs.size());
 
-        return orders;
+        return chefs;
     }
 }

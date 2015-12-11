@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:id="@+id/chefDetailActivity"
     tools:context="app.com.example.foodie.foodieandroid.Activities.ChefDetailActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -17,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:title="@string/title_activity_chef_detail"
+            android:title=""
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>

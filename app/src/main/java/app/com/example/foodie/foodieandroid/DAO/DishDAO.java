@@ -19,7 +19,6 @@ import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Application.FoodieApp;
 import app.com.example.foodie.foodieandroid.Model.Dish;
-import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 
 /**
  * Created by muratozgul on 08/12/15.
@@ -27,7 +26,7 @@ import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 public class DishDAO {
     private static final String TAG = "DishDAO";
     private static String restApiBaseUrl = FoodieApp.getApiUrl();
-    private static String orderUrl = "/dish";
+    private static String dishUrl = "/dish";
 
     //############################
     //API GET methods
@@ -38,7 +37,7 @@ public class DishDAO {
         // Build url
         StringBuilder sb = new StringBuilder();
         sb.append(restApiBaseUrl);
-        sb.append(orderUrl);
+        sb.append(dishUrl);
         sb.append("/");
         sb.append(Integer.toString(id));
         String url = sb.toString();
@@ -74,7 +73,7 @@ public class DishDAO {
         // Build url
         StringBuilder sb = new StringBuilder();
         sb.append(restApiBaseUrl);
-        sb.append(orderUrl);
+        sb.append(dishUrl);
         String url = sb.toString();
 
         // Create new response listener
