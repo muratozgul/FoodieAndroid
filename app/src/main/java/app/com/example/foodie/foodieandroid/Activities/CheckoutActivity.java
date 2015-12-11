@@ -69,6 +69,7 @@ public class CheckoutActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Checkout");
         //in manifest file -> set android:parentActivityName
 
         //intent data for order

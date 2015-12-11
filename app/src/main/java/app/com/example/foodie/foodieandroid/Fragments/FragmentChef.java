@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -65,7 +63,6 @@ public class FragmentChef extends Fragment {
 
         Uri imgUri = Uri.parse(chef.getProfile_img());
         Picasso.with(getActivity()).load(imgUri).into(chefImg);
-
         chefName.setText(chef.getName());
         chefMealsServed.setText(chef.getNumOfDishes() + " meals served");
         view.setOnClickListener(new View.OnClickListener() {

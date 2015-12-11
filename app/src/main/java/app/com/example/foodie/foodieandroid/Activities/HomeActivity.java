@@ -174,6 +174,7 @@ public class HomeActivity extends AppCompatActivity implements
         return true;
     }
 
+    // Icons on main page
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -193,8 +194,8 @@ public class HomeActivity extends AppCompatActivity implements
                 Intent locationMapActivity = new Intent(this, MapsActivity.class);
                 startActivity(locationMapActivity);
                 break;
+            // When user click customer image or camera icon, it will invoke the camera
             case R.id.customerImg:
-                break;
             case R.id.camera:
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {

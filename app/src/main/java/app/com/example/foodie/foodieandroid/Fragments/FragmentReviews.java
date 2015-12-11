@@ -24,7 +24,9 @@ public class FragmentReviews extends Fragment implements IReviewCallback {
 
     private List<Review> reviews = new ArrayList<Review>();
     private int dish_id;
-    private String url;
+    private int chef_id;
+    // Chef review or dish review
+    private String type;
     private RecyclerView reviewRV;
     private RecyclerView.Adapter reviewAdapter;
     private RecyclerView.LayoutManager reviewManager;
@@ -37,9 +39,16 @@ public class FragmentReviews extends Fragment implements IReviewCallback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dish_id = getArguments().getInt("dish_id");
-        Log.e("REVIEWS: ", " DISH_ID: " + dish_id);
-        fetchReviewsFromServer(dish_id);
+        type = getArguments().getString("type");
+        if(type == "dish") {
+            dish_id = getArguments().getInt("dish_id");
+            Log.e("REVIEWS: ", " DISH_ID: " + dish_id);
+            fetchReviewsFromServer(dish_id, type);
+        } else if(type == "chef"){
+            chef_id = getArguments().getInt("chef_id");
+            Log.e("REVIEWS: ", " CHEF_ID: " + chef_id);
+            fetchReviewsFromServer(chef_id, type);
+        }
     }
 
     @Override
@@ -65,8 +74,8 @@ public class FragmentReviews extends Fragment implements IReviewCallback {
         super.onActivityCreated(savedInstanceState);
     }
 
-    public void fetchReviewsFromServer(int dish_id){
-        ReviewDAO.findById(dish_id, this);
+    public void fetchReviewsFromServer(int dish_id, String type){
+        ReviewDAO.findById(dish_id, type, this);
     }
 
     //############################

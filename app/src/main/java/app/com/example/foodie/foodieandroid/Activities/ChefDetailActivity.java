@@ -76,6 +76,13 @@ public class ChefDetailActivity extends AppCompatActivity implements IChefCallba
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment fragment = FragmentChef.newInstance(chef);
         ft.add(R.id.chef_fragment_container, fragment, "CHEF");
+
+        Bundle bundle = new Bundle();
+        bundle.putString("type", "chef");
+        bundle.putInt("chef_id", chef.getUser_id());
+        Fragment review_fragment = new FragmentReviews();
+        review_fragment.setArguments(bundle);
+        ft.add(R.id.review_fragment_container, review_fragment, "REVIEWS");
         ft.commit();
     }
 

@@ -84,7 +84,7 @@ public class Chef extends User implements Serializable {
 
     public String getTags() {
         StringBuilder allTags = new StringBuilder();
-        for(int i = 0; i < tags.size() - 1; i++){
+        for(int i = 0; i < Math.min(tags.size() - 1, 1); i++){
             allTags.append(tags.get(i));
             allTags.append(" | ");
         }

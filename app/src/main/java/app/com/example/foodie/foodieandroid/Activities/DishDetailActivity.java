@@ -17,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -28,6 +29,7 @@ import com.squareup.picasso.Target;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.com.example.foodie.foodieandroid.Application.FoodieApp;
 import app.com.example.foodie.foodieandroid.DAO.ChefDAO;
 import app.com.example.foodie.foodieandroid.DAO.DishDAO;
 import app.com.example.foodie.foodieandroid.DAO.IDishCallback;
@@ -46,6 +48,7 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
     private TextView dishPrice;
     private RatingBar ratingBar;
     private TextView dishTags;
+    private TextView checkoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,7 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
         ft.add(R.id.fragment_container, chef_fragment, "CHEF");
 
         Bundle bundle = new Bundle();
+        bundle.putString("type", "dish");
         bundle.putInt("dish_id", dish.getDish_id());
         Fragment review_fragment = new FragmentReviews();
         review_fragment.setArguments(bundle);
@@ -92,8 +96,39 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_checkout, menu);
-        View count = menu.findItem(R.id.checkout).getActionView();
+
+        final View checkout = menu.findItem(R.id.checkout).getActionView();
+        checkoutButton = (TextView) checkout.findViewById(R.id.cart_qty);
+
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(checkout.getContext(), CheckoutActivity.class);
+                checkout.getContext().startActivity(intent);
+                int cartSize = FoodieApp.getInstance().getCart().size();
+                checkoutButton.setText(Integer.toString(cartSize));
+            }
+        });
+
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.checkout) {
+            Intent checkoutIntent = new Intent(this, CheckoutActivity.class);
+            startActivity(checkoutIntent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void fetchDishFromServer(int id) {

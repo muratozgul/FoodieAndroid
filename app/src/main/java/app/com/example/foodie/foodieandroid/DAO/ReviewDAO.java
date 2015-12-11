@@ -27,18 +27,23 @@ import app.com.example.foodie.foodieandroid.Model.Review;
 public class ReviewDAO {
     private static final String TAG = "ReviewDAO";
     private static String restApiBaseUrl = FoodieApp.getApiUrl();
-    private static String reviewUrl = "/reviews/dishes";
+    private static String dishReviewUrl = "/reviews/dishes";
+    private static String chefReviewUrl = "/reviews/chefs";
 
     //############################
     //API GET methods
     //############################
 
     // Return reviews by dishId
-    public static void findById(int id, final IReviewCallback cbInterface) {
+    public static void findById(int id, String type, final IReviewCallback cbInterface) {
         // Build url
         StringBuilder sb = new StringBuilder();
         sb.append(restApiBaseUrl);
-        sb.append(reviewUrl);
+        if(type == "dish"){
+            sb.append(dishReviewUrl);
+        } else if(type == "chef"){
+            sb.append(chefReviewUrl);
+        }
         sb.append("/");
         sb.append(Integer.toString(id));
         String url = sb.toString();

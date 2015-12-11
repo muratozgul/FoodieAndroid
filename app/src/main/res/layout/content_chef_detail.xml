@@ -18,14 +18,6 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-
-        <!--<fragment-->
-        <!--android:id="@+id/reviewFragment"-->
-        <!--class="app.com.example.foodie.foodieandroid.Fragments.FragmentReviews"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -33,5 +25,13 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    <LinearLayout
+        android:id="@+id/review_fragment_container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </LinearLayout>
 
 </LinearLayout>
