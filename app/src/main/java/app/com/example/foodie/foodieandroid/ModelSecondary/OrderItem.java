@@ -24,6 +24,9 @@ public class OrderItem implements Parcelable {
     @SerializedName("price")
     private double totalPrice;
 
+    @SerializedName("dish")
+    private Dish dishObject;
+
     //############################
     //Constructors
     //############################
@@ -33,18 +36,21 @@ public class OrderItem implements Parcelable {
         this.order_id = orderId;
         this.dish_id = dish_id;
         this.quantity = quantity;
+        this.dishObject = null;
     }
 
     public OrderItem(int dish_id, int quantity, double totalPrice) {
         this.dish_id = dish_id;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
+        this.dishObject = null;
     }
 
     public OrderItem(Dish dish, int quantity, double totalPrice) {
         this.dish_id = dish.getDish_id();
         this.quantity = quantity;
         this.totalPrice = totalPrice;
+        this.dishObject = dish;
     }
 
     //############################

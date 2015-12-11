@@ -10,6 +10,7 @@ import java.util.HashMap;
 import app.com.example.foodie.foodieandroid.Helpers.ShoppingCart;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
+import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 
 import static org.junit.Assert.assertEquals;
 
@@ -47,5 +48,18 @@ public class OrderUnitTest {
 
         assertEquals(2, order.getOrderItem(1).getDish_id());
         assertEquals(3, order.getOrderItem(1).getQuantity());
+    }
+
+    @Test
+    public void shouldGenerateDateTextFromTimeStamp() throws Exception {
+        //Tuesday, December 8, 2015 7:15:12 AM UTC
+        String timestamp = "1449558912000";
+        long milliseconds = Long.parseLong(timestamp);
+
+        assertEquals(1449558912000L, milliseconds);
+
+        Order order = new Order(1,1,1,timestamp, new ArrayList<OrderItem>(), 50d);
+
+        assertEquals("Dec 7, 2015 11:15:12 PM", order.getOrderDateString());
     }
 }

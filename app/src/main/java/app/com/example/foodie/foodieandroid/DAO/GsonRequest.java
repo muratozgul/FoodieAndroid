@@ -11,7 +11,6 @@ import com.google.gson.JsonSyntaxException;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -77,11 +76,11 @@ public class GsonRequest<T> extends Request<T> {
                 parsedObject = gson.fromJson(json, clazz);
             }
 
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
             return Response.success(parsedObject, HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {

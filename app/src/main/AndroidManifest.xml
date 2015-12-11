@@ -106,7 +106,8 @@
         <activity
             android:name=".Activities.CheckoutActivity"
             android:label="@string/title_activity_checkout"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Activities.HomeActivity">
         </activity>
     </application>
 

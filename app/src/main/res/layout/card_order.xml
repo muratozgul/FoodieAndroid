@@ -43,21 +43,12 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
-                android:id="@+id/orderCard_chef"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/orderCard_id"
-                android:text="Chef Emily"
-                android:paddingBottom="10dp"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
                 android:id="@+id/orderCard_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/orderCard_chef"
                 android:text="Beef Steak x 2"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_below="@id/orderCard_id" />
 
             <TextView
                 android:id="@+id/orderCard_price"
