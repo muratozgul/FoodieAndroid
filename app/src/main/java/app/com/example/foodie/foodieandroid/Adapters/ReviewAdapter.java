@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Model.Customer;
@@ -24,7 +26,8 @@ import app.com.example.foodie.foodieandroid.R;
  * Created by Jennifer on 11/30/15.
  */
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>{
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<Review>();
+    private Customer reviewer = new Customer();
 
     public static class ReviewViewHolder extends RecyclerView.ViewHolder{
         public CardView reviewCV;
@@ -56,16 +59,22 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     @Override
     public void onBindViewHolder(ReviewViewHolder reviewViewHolder, int i){
-        //TODO: TO BE REPLACED WITH CUSTOMER FETCH
-        Customer reviewer = new Customer(1, "Jennifer", "https://pbs.twimg.com/profile_images/494064814084608000/Upeiqf_a.jpeg");
-
+        if (i >= reviews.size()) {
+            return;
+        }
+        reviewer = reviews.get(i).getCustomer();
+        Uri uri;
         Context context = reviewViewHolder.reviewerImg.getContext();
-        Uri uri = Uri.parse(reviewer.getProfile_img());
-        Picasso.with(context).load(uri).into(reviewViewHolder.reviewerImg);
+        if(reviewer.getProfile_img() != null) {
+             uri = Uri.parse(reviewer.getProfile_img());
+        } else {
+            uri = Uri.parse("https://cdn2.iconfinder.com/data/icons/rcons-user/32/female-fill-circle-512.png");
+        }
 
+        Picasso.with(context).load(uri).into(reviewViewHolder.reviewerImg);
         reviewViewHolder.reviewerName.setText(reviewer.getName());
         reviewViewHolder.dishRating.setRating(reviews.get(i).getStar_rating());
-        reviewViewHolder.reviewText.setText(reviews.get(i).getTimestamp());
+        reviewViewHolder.reviewTime.setText(reviews.get(i).getReviewDateString());
         reviewViewHolder.reviewText.setText(reviews.get(i).getReview_text());
     }
 

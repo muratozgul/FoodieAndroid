@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity implements
         findViewById(R.id.chef_list).setOnClickListener(this);
         findViewById(R.id.dish_list).setOnClickListener(this);
         findViewById(R.id.categories).setOnClickListener(this);
-//        findViewById(R.id.location_map).setOnClickListener(this);
+        findViewById(R.id.location_map).setOnClickListener(this);
     }
 
     @Override
@@ -190,7 +190,7 @@ public class HomeActivity extends AppCompatActivity implements
                 startActivity(categoryActivity);
                 break;
             case R.id.location_map:
-                Intent locationMapActivity = new Intent(this, DishDetailActivity.class);
+                Intent locationMapActivity = new Intent(this, MapsActivity.class);
                 startActivity(locationMapActivity);
                 break;
             case R.id.customerImg:

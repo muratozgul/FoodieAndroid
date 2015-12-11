@@ -29,6 +29,7 @@ import app.com.example.foodie.foodieandroid.DAO.ChefDAO;
 import app.com.example.foodie.foodieandroid.DAO.DishDAO;
 import app.com.example.foodie.foodieandroid.DAO.IChefCallback;
 import app.com.example.foodie.foodieandroid.Fragments.FragmentChef;
+import app.com.example.foodie.foodieandroid.Fragments.FragmentReviews;
 import app.com.example.foodie.foodieandroid.Model.Chef;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.R;
@@ -56,7 +57,7 @@ public class ChefDetailActivity extends AppCompatActivity implements IChefCallba
         //addDish();
 
         chefDishRV = (RecyclerView) findViewById(R.id.chefDishRecycler);
-        chefDishRV.setHasFixedSize(true);
+        //chefDishRV.setHasFixedSize(true);
 
         chefDishLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         chefDishRV.setLayoutManager(chefDishLayoutManager);
@@ -65,12 +66,13 @@ public class ChefDetailActivity extends AppCompatActivity implements IChefCallba
         chefDishRV.setAdapter(chefDishAdapter);
 
         fetchChefFromServer(chef_id);
-
-        getSupportActionBar().setTitle(chef.getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void updateUI(){
+
+        getSupportActionBar().setTitle(chef.getName());
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment fragment = FragmentChef.newInstance(chef);
         ft.add(R.id.chef_fragment_container, fragment, "CHEF");
@@ -88,11 +90,11 @@ public class ChefDetailActivity extends AppCompatActivity implements IChefCallba
     @Override
     public void findChefByIdCb(Chef chef) {
         this.chef = chef;
-        this.chefDishes = chef.getDishes();
-        this.chefDishAdapter.notifyDataSetChanged();
+        if (chef != null && chef.getDishes() != null) {
+            this.chefDishes.addAll(chef.getDishes());
+        }
         updateUI();
-        Log.e(TAG, chef.toString());
-        Log.e(TAG, chefDishes.toString());
+        this.chefDishAdapter.notifyDataSetChanged();
     }
 
     @Override

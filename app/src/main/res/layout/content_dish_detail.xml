@@ -17,8 +17,7 @@
         android:id="@+id/dishImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/pizza" />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +31,6 @@
             android:layout_width="9dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Chinese"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorSecondaryText" />
 
@@ -44,7 +42,6 @@
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="$9.99"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/colorPrimaryText"
             android:textStyle="italic" />
@@ -63,8 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:numStars="5"
-            android:progressDrawable="@drawable/ratingbar"
-            android:rating="4.5" />
+            android:progressDrawable="@drawable/ratingbar"/>
 
         <Button
             android:id="@+id/buyButton"
@@ -85,18 +81,6 @@
         android:layout_height="match_parent"
         android:id="@+id/fragment_container"
         android:orientation="vertical">
-
-        <!--<fragment-->
-            <!--android:id="@+id/chefFragment"-->
-            <!--class="app.com.example.foodie.foodieandroid.Fragments.FragmentChef"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-
-        <!--<fragment-->
-            <!--android:id="@+id/reviewFragment"-->
-            <!--class="app.com.example.foodie.foodieandroid.Fragments.FragmentReviews"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
 
     </LinearLayout>
 

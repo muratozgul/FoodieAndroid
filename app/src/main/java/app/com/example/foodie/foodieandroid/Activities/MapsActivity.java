@@ -1,5 +1,6 @@
 package app.com.example.foodie.foodieandroid.Activities;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -7,14 +8,21 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Arrays;
+import java.util.List;
 
 import app.com.example.foodie.foodieandroid.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private List<Marker> markers;
+    private int[] id ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +34,51 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+                for (int i = 0; i < markers.size(); i ++) {
+                    Marker m = markers.get(i);
+                    if (marker.getTitle() != null && marker.getTitle().equals(m.getTitle())) {
+
+                        Intent intent = new Intent(MapsActivity.this, ChefDetailActivity.class);
+                        intent.putExtra("chef_id", id[i]);
+                        startActivity(intent);
+
+                    }
+                }
+            }
+        });
+
+        LatLng me = new LatLng(37.3861111, -122.0827778);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(me, 12.0f));
+
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng mtv1 = new LatLng(37.4095839, -122.0553239);
+        Marker marker1 = mMap.addMarker(new MarkerOptions().position(mtv1)
+                .title("Chef 1").snippet("Sweets!")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+        LatLng mtv2 = new LatLng(37.4024425, -122.073891);
+        Marker marker2 = mMap.addMarker(new MarkerOptions().position(mtv2)
+                .title("Chef 3").snippet("Vegetarian!")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+        LatLng mtv3 = new LatLng(37.3916237, -122.0826246);
+        Marker marker3 = mMap.addMarker(new MarkerOptions().position(mtv3)
+                .title("Chef 7").snippet("Chinese!")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+        markers = Arrays.asList(marker1, marker2, marker3);
+        id = new int[]{1,3,7};
+
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(me));
     }
+
 }

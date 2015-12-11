@@ -2,6 +2,7 @@ package app.com.example.foodie.foodieandroid.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Utility.Location;
@@ -10,7 +11,7 @@ import app.com.example.foodie.foodieandroid.Utility.UserSettings;
 /**
  * Created by Jennifer on 11/11/15.
  */
-public abstract class User {
+public abstract class User implements Serializable {
 
     @SerializedName("id")
     private int user_id;
@@ -97,6 +98,13 @@ public abstract class User {
         this.location = location;
     }
 
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("id: " + getUser_id());
+        sb.append("\nname: " + getName());
+        sb.append("\npic: " + getProfile_img());
+        return sb.toString();
+    }
     //############################
     //HashMap Comparison Methods
     //############################

@@ -2,13 +2,14 @@ package app.com.example.foodie.foodieandroid.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Jennifer on 11/11/15.
  */
-public class Dish {
+public class Dish implements Serializable {
 
     @SerializedName("id")
     private int dish_id;
@@ -56,6 +57,7 @@ public class Dish {
     }
 
     public Dish(){}
+
     //############################
     //Getters & Setters
     //############################

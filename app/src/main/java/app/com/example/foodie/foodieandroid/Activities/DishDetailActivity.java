@@ -32,6 +32,7 @@ import app.com.example.foodie.foodieandroid.DAO.ChefDAO;
 import app.com.example.foodie.foodieandroid.DAO.DishDAO;
 import app.com.example.foodie.foodieandroid.DAO.IDishCallback;
 import app.com.example.foodie.foodieandroid.Fragments.FragmentChef;
+import app.com.example.foodie.foodieandroid.Fragments.FragmentReviews;
 import app.com.example.foodie.foodieandroid.Model.Chef;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.Model.Review;
@@ -63,29 +64,28 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
     }
 
     public void updateUI(){
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = FragmentChef.newInstance(chef);
-        ft.add(R.id.fragment_container, fragment, "CHEF");
-        ft.commit();
+        getSupportActionBar().setTitle(dish.getName());
 
         dishImage = (ImageView) findViewById(R.id.dishImage);
         dishPrice = (TextView) findViewById(R.id.dishPrice);
         ratingBar = (RatingBar) findViewById(R.id.dishRating);
         dishTags = (TextView) findViewById(R.id.dishTags);
-
-        Log.e(TAG, "DISH: " + dish.toString());
-        Log.e(TAG, "CHEF: " + chef.toString());
-
-        getSupportActionBar().setTitle(dish.getName());
         dishPrice.setText("$" + dish.getPrice());
         dishTags.setText(dish.getTags());
         ratingBar.setRating(dish.getRating());
-
         Uri dishUri = Uri.parse(dish.getDishImage());
-        Picasso.with(this)
-                .load(dishUri)
-                .into(dishImage);
+        Picasso.with(this).load(dishUri).into(dishImage);
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment chef_fragment = FragmentChef.newInstance(chef);
+        ft.add(R.id.fragment_container, chef_fragment, "CHEF");
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("dish_id", dish.getDish_id());
+        Fragment review_fragment = new FragmentReviews();
+        review_fragment.setArguments(bundle);
+        ft.add(R.id.fragment_container, review_fragment, "REVIEWS");
+        ft.commit();
     }
 
     @Override
@@ -99,6 +99,7 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
     public void fetchDishFromServer(int id) {
         DishDAO.findById(id, this);
     }
+
     //############################
     //IChefCallback Interface Methods
     //############################
@@ -124,24 +125,4 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
     public void findAllDishesCb(String responseString) {
 
     }
-
-//    public void findDish(int id){
-//        List<Dish> dishes = new ArrayList<Dish>();
-//        List<String> tags = new ArrayList<String>();
-//        tags.add("Chinese");
-//        tags.add("Vege");
-//        dishes.add(new Dish(21, "Mini Raspeberry Pavlovas", 4.5f, 3.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/mini_raspeberry_pavlovas.jpg", 11));
-//        dishes.add(new Dish(22, "Cake", 4, 8.99, tags, "http://www.freefoodphotos.com/imagelibrary/cooking/thumbs/cake_making.jpg", 12));
-//        dishes.add(new Dish(23, "Strawberries", 3.5f, 4.99, tags, "http://www.freefoodphotos.com/imagelibrary/fruit/thumbs/three_strawberries.jpg", 13));
-//        dishes.add(new Dish(24, "Dessert Merigues", 3, 7.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/dessert_meringues.jpg", 11));
-//        dishes.add(new Dish(25, "Bread", 2, 6.99, tags, "http://www.freefoodphotos.com/imagelibrary/bread/thumbs/bread.jpg", 12));
-//        dishes.add(new Dish(26, "Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg", 13));
-//
-//        //TODO: CHECK EXCEPTION
-//        for(int i = 0; i < dishes.size(); i++){
-//            if(dishes.get(i).getDish_id() == id){
-//                dish = dishes.get(i);
-//            }
-//        }
-//    }
 }

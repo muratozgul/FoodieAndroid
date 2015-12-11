@@ -2,9 +2,10 @@ package app.com.example.foodie.foodieandroid.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Adapters.ReviewAdapter;
+import app.com.example.foodie.foodieandroid.DAO.DishDAO;
+import app.com.example.foodie.foodieandroid.DAO.IReviewCallback;
+import app.com.example.foodie.foodieandroid.DAO.ReviewDAO;
 import app.com.example.foodie.foodieandroid.Model.Review;
 import app.com.example.foodie.foodieandroid.R;
 
-public class FragmentReviews extends Fragment {
+public class FragmentReviews extends Fragment implements IReviewCallback {
 
-    private List<Review> reviews;
-
+    private List<Review> reviews = new ArrayList<Review>();
+    private int dish_id;
+    private String url;
     private RecyclerView reviewRV;
     private RecyclerView.Adapter reviewAdapter;
     private RecyclerView.LayoutManager reviewManager;
@@ -32,6 +37,9 @@ public class FragmentReviews extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dish_id = getArguments().getInt("dish_id");
+        Log.e("REVIEWS: ", " DISH_ID: " + dish_id);
+        fetchReviewsFromServer(dish_id);
     }
 
     @Override
@@ -46,12 +54,9 @@ public class FragmentReviews extends Fragment {
 
         reviewManager = new LinearLayoutManager(view.getContext());
         reviewRV.setLayoutManager(reviewManager);
-
-        addReviews();
-
-        // specify an adapter (see also next example)
         reviewAdapter = new ReviewAdapter(reviews);
         reviewRV.setAdapter(reviewAdapter);
+
         return view;
     }
 
@@ -60,15 +65,18 @@ public class FragmentReviews extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    public void fetchReviewsFromServer(int dish_id){
+        ReviewDAO.findById(dish_id, this);
+    }
 
-    public void addReviews(){
-        reviews = new ArrayList<Review>();
+    //############################
+    //IReviewCallback Interface Methods
+    //############################
 
-        reviews.add(new Review(1, 4.5f, "This is really really delicious 1", "03/05/2015", 1, 1));
-        reviews.add(new Review(2, 4.0f, "This is really really delicious 2", "03/05/2015", 2, 2));
-        reviews.add(new Review(3, 3.5f, "This is really really delicious 3", "03/05/2015", 1, 3));
-        reviews.add(new Review(4, 2.5f, "This is really really delicious 4", "03/05/2015", 2, 4));
-        reviews.add(new Review(5, 1.0f, "This is really really delicious 5", "03/05/2015", 1, 5));
-        reviews.add(new Review(6, 5.0f, "This is really really delicious 6", "03/05/2015", 2, 6));
+    @Override
+    public void findReviewsByDishIdCb(ArrayList<Review> reviews) {
+        this.reviews.addAll(reviews);
+        this.reviewAdapter.notifyDataSetChanged();
+        Log.e("REVIEWS: ", reviews.toString());
     }
 }
