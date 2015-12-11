@@ -1,10 +1,12 @@
 package app.com.example.foodie.foodieandroid.Helpers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
+import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 
 
 public class ShoppingCart {
@@ -13,6 +15,7 @@ public class ShoppingCart {
 
     // Key: Dish, Value: Quantity
     private HashMap<Dish, Integer> contents;
+    private Double totalCost;
 
     //############################
     //Constructors
@@ -20,6 +23,7 @@ public class ShoppingCart {
 
     protected ShoppingCart(){
         this.contents = new HashMap<Dish, Integer>();
+        this.totalCost = 0d;
     }
 
     //############################
@@ -47,15 +51,37 @@ public class ShoppingCart {
         return sum;
     }
 
+    public ArrayList<OrderItem> getItemsAsList() {
+        ArrayList<OrderItem> items = new ArrayList<OrderItem>();
+
+        for (Map.Entry<Dish, Integer> entry : this.contents.entrySet()) {
+            Dish dish = entry.getKey();
+            int quantity = entry.getValue().intValue();
+
+            double price = quantity*dish.getPrice();
+
+            items.add(new OrderItem(dish.getDish_id(), quantity, price));
+        }
+
+        return items;
+    }
+
+    public Double getTotalCost() {
+        return totalCost;
+    }
+
     //############################
     //Other Methods
     //############################
 
     public void empty(){
+        this.totalCost = 0d;
         this.contents = new HashMap<Dish, Integer>();
     }
 
     public void addOne(Dish dish){
+        this.totalCost += dish.getPrice();
+
         if(this.contents.containsKey(dish)){
             this.contents.put(dish, this.contents.get(dish)+1);
         } else {
@@ -64,6 +90,8 @@ public class ShoppingCart {
     }
 
     public void removeOne(Dish dish){
+        this.totalCost -= dish.getPrice();
+
         if(this.contents.containsKey(dish)){
             int amount = this.contents.get(dish);
             if(amount <= 1){
@@ -75,7 +103,11 @@ public class ShoppingCart {
     }
 
     public void removeAll(Dish dish){
+
         if(this.contents.containsKey(dish)){
+            int quantity = this.contents.get(dish);
+            this.totalCost -= (quantity*dish.getPrice());
+
             this.contents.remove(dish);
         }
     }

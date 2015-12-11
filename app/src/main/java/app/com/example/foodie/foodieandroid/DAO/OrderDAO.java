@@ -188,7 +188,7 @@ public class OrderDAO {
     }
 
     //############################
-    //JSON parsing methods
+    //JSON parsing methods (obsolete - not used)
     //############################
 
     public static Order parseJsonObject(JSONObject jsonObject){

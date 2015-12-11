@@ -5,7 +5,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -211,6 +213,11 @@ public class Order implements Parcelable{
 
     public OrderItem getOrderItem(int index){
         return this.orderItems.get(index);
+    }
+
+    public String getOrderDateString(){
+        //timestamp is in milliseconds
+        return DateFormat.getDateTimeInstance().format(new Date(Long.parseLong(time_stamp)));
     }
 
     public String toString(){
