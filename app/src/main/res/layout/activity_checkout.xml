@@ -16,18 +16,25 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include
-        android:id="@+id/cartItems"
-        android:layout_width="fill_parent"
+    <!--<include-->
+        <!--android:id="@+id/cartItems"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="440dp"-->
+        <!--layout="@layout/content_checkout"-->
+        <!--android:layout_below="@+id/view" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cartItemsRecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="440dp"
-        layout="@layout/content_checkout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_below="@+id/view" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_below="@+id/cartItems"
+        android:layout_below="@+id/cartItemsRecyclerView"
         android:padding="10dp"
         android:background="@color/colorPrimaryDark">
 

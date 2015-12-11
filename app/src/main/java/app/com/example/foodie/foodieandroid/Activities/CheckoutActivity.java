@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -33,8 +35,8 @@ public class CheckoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //in manifest file -> set android:parentActivityName
 
@@ -46,8 +48,7 @@ public class CheckoutActivity extends AppCompatActivity {
         itemCountView = (TextView) findViewById(R.id.cartItemCount);
         totalPriceView = (TextView) findViewById(R.id.cartTotalCost);
 
-
-        cartItemsRecyclerView = (RecyclerView) findViewById(R.id.ordersItemsRecyclerView);
+        cartItemsRecyclerView = (RecyclerView) findViewById(R.id.cartItemsRecyclerView);
         //enable optimizations if all item views are
         // of the same height and width for significantly smoother scrolling
         //ordersRecyclerView.setHasFixedSize(true);

@@ -1,5 +1,6 @@
 package app.com.example.foodie.foodieandroid.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -24,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import app.com.example.foodie.foodieandroid.Application.FoodieApp;
 import app.com.example.foodie.foodieandroid.R;
 
 public class HomeActivity extends AppCompatActivity implements
@@ -33,6 +35,7 @@ public class HomeActivity extends AppCompatActivity implements
     private ImageView customerImg;
     private TextView checkoutButton;
     private View header;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class HomeActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        context = this;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -78,9 +83,22 @@ public class HomeActivity extends AppCompatActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_checkout, menu);
-        View count = menu.findItem(R.id.checkout).getActionView();
-        checkoutButton = (TextView) count.findViewById(R.id.cart_qty);
-        checkoutButton.setText("2");
+
+        View checkout = menu.findItem(R.id.checkout).getActionView();
+        checkoutButton = (TextView) checkout.findViewById(R.id.cart_qty);
+
+        int cartSize = FoodieApp.getInstance().getCart().size();
+        checkoutButton.setText(Integer.toString(cartSize));
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CheckoutActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -176,11 +194,17 @@ public class HomeActivity extends AppCompatActivity implements
                 startActivity(locationMapActivity);
                 break;
             case R.id.customerImg:
+                break;
             case R.id.camera:
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
+                break;
+            default:
+                Toast.makeText(this, getResources().getResourceEntryName(v.getId()) + " clicked", Toast.LENGTH_SHORT).show();
+                break;
+
         }
     }
 
