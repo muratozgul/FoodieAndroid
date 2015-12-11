@@ -49,7 +49,9 @@ public class DishMenuActivity extends AppCompatActivity implements IDishCallback
         //addDish();
 
         // specify an adapter (see also next example)
-        dishMenuAdapter = new DishMenuAdapter(dishes);
+        //dishMenuAdapter = new DishMenuAdapter(dishes);
+        dishMenuAdapter = new DishMenuAdapter(dishes, this);
+
         dishMenuRV.setAdapter(dishMenuAdapter);
 
         fetchDishesFromServer();
