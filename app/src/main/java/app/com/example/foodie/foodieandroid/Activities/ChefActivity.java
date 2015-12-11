@@ -22,7 +22,7 @@ public class ChefActivity extends AppCompatActivity implements IChefCallback{
     private RecyclerView chefRV;
     private RecyclerView.Adapter chefAdapter;
     private RecyclerView.LayoutManager chefLayoutManager;
-    private List<Chef> chefs;
+    private List<Chef> chefs = new ArrayList<Chef>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class ChefActivity extends AppCompatActivity implements IChefCallback{
         chefLayoutManager = new LinearLayoutManager(this);
         chefRV.setLayoutManager(chefLayoutManager);
 
-        addChef();
+        //addChef();
 
         chefAdapter = new ChefAdapter(chefs);
         chefRV.setAdapter(chefAdapter);

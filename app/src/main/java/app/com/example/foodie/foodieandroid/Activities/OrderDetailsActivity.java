@@ -41,7 +41,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
         orderItemsRecyclerView = (RecyclerView) findViewById(R.id.ordersItemsRecyclerView);
         //enable optimizations if all item views are
-        // of the same height and width for significantly smoother scrolling
+        //of the same height and width for significantly smoother scrolling
         //ordersRecyclerView.setHasFixedSize(true);
 
         orderItemsLayoutManager = new LinearLayoutManager(this);

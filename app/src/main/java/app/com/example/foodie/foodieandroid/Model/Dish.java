@@ -28,45 +28,34 @@ public class Dish {
     @SerializedName("tags")
     private List<String> tags;
 
-    @SerializedName("chef_id")
-    private int chef_id;
+    @SerializedName("chef")
+    private Chef chef;
 
     //############################
     //Constructors
     //############################
 
-    public Dish(int dish_id, String name, float rating, double price, List<String> tags, String dish_img, int chef_id) {
+    public Dish(int dish_id, String name, float rating, double price, List<String> tags, String dish_img, Chef chef) {
         this.dish_id = dish_id;
         this.name = name;
         this.rating = rating;
         this.price = price;
-        //this.tags = tags;
         this.tags = tags != null ? tags : new ArrayList<String>();
-
         this.dish_img = dish_img;
-        this.chef_id = chef_id;
+        this.chef = chef;
     }
 
-    public Dish(int id, String name, float rating, double price, String imageUrl, int chef_id) {
-        this.dish_id = id;
+    public Dish(int dish_id, String name, float rating, double price, String imageUrl, Chef chef) {
+        this.dish_id = dish_id;
         this.name = name;
         this.rating = rating;
         this.price = price;
         this.tags =  new ArrayList<String>();
         this.dish_img = imageUrl;
-        this.chef_id = chef_id;
+        this.chef = chef;
     }
 
-    public Dish(int dish_id, String name, double price) {
-        this.dish_id = dish_id;
-        this.name = name;
-        this.rating = 4;
-        this.price = price;
-        this.tags = new ArrayList<String>();
-        this.dish_img = "";
-        this.chef_id = 0;
-    }
-
+    public Dish(){}
     //############################
     //Getters & Setters
     //############################
@@ -128,12 +117,12 @@ public class Dish {
         this.tags = tags;
     }
 
-    public int getChef_id() {
-        return chef_id;
+    public Chef getChef() {
+        return chef;
     }
 
-    public void setChef_id(int chef_id) {
-        this.chef_id = chef_id;
+    public void setChef(Chef chef) {
+        this.chef = chef;
     }
 
     public void setRating(float rating) {
@@ -148,9 +137,22 @@ public class Dish {
         this.dish_img = dish_img;
     }
 
+    // For debugging
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\ndish_id: " + dish_id);
+        sb.append("\nname: " + name);
+        sb.append("\nrating: " + rating);
+        sb.append("\npic: " + dish_img);
+        sb.append("\nprice: " + price);
+        sb.append("\ntags:" + tags);
+        return sb.toString();
+    }
+
     //############################
     //HashMap Comparison Methods
     //############################
+
     @Override
     public int hashCode(){
         return dish_id;

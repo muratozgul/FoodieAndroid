@@ -56,7 +56,7 @@ public class DishDAO {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "Order findById Error: " + error.getMessage());
+                Log.d(TAG, "Dish findById Error: " + error.getMessage());
             }
         };
 
@@ -111,7 +111,7 @@ public class DishDAO {
 
         //convert the json string back to object
         dish = gson.fromJson(jsonObject.toString(), Dish.class);
-        Log.d(TAG, "Order parseGsonObject: " + dish.toString());
+        Log.d(TAG, "Dish parseGsonObject: " + dish.toString());
 
         return dish;
     }
@@ -121,7 +121,7 @@ public class DishDAO {
 
         Type listType = new TypeToken<List<Dish>>() {}.getType();
         ArrayList<Dish> dishes = (ArrayList<Dish>) gson.fromJson(jsonArray.toString(), listType);
-        Log.d(TAG, "Order parseGsonArray: size:" + dishes.size());
+        Log.d(TAG, "Dish parseGsonArray: size:" + dishes.size());
 
         return dishes;
     }

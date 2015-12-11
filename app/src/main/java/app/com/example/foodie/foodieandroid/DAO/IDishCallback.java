@@ -2,6 +2,7 @@ package app.com.example.foodie.foodieandroid.DAO;
 
 import java.util.ArrayList;
 
+import app.com.example.foodie.foodieandroid.Model.Chef;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 
 /**

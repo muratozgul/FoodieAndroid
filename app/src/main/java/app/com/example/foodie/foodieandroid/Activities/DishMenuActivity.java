@@ -16,16 +16,18 @@ import java.util.List;
 import app.com.example.foodie.foodieandroid.Adapters.DishMenuAdapter;
 import app.com.example.foodie.foodieandroid.DAO.DishDAO;
 import app.com.example.foodie.foodieandroid.DAO.IDishCallback;
+import app.com.example.foodie.foodieandroid.Model.Chef;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.R;
 /**
  * Created by Jennifer on 11/11/15.
  */
+
 public class DishMenuActivity extends AppCompatActivity implements IDishCallback{
     private RecyclerView dishMenuRV;
     private RecyclerView.Adapter dishMenuAdapter;
     private RecyclerView.LayoutManager dishMenuLayoutManager;
-    private List<Dish> dishes;
+    private List<Dish> dishes = new ArrayList<Dish>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class DishMenuActivity extends AppCompatActivity implements IDishCallback
         dishMenuLayoutManager = new LinearLayoutManager(this);
         dishMenuRV.setLayoutManager(dishMenuLayoutManager);
 
-        addDish();
+        //addDish();
 
         // specify an adapter (see also next example)
         dishMenuAdapter = new DishMenuAdapter(dishes);
@@ -61,18 +63,18 @@ public class DishMenuActivity extends AppCompatActivity implements IDishCallback
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void addDish(){
-        dishes = new ArrayList<Dish>();
-        List<String> tags = new ArrayList<String>();
-        tags.add("Chinese");
-        tags.add("Vege");
-        dishes.add(new Dish(1, "Mini Raspeberry Pavlovas", 4.5f, 3.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/mini_raspeberry_pavlovas.jpg", 11));
-        dishes.add(new Dish(2, "Cake", 4, 8.99, tags, "http://www.freefoodphotos.com/imagelibrary/cooking/thumbs/cake_making.jpg",12));
-        dishes.add(new Dish(3, "Strawberries", 3.5f, 4.99, tags, "http://www.freefoodphotos.com/imagelibrary/fruit/thumbs/three_strawberries.jpg", 13));
-        dishes.add(new Dish(4, "Dessert Merigues", 3, 7.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/dessert_meringues.jpg", 11));
-        dishes.add(new Dish(5, "Bread", 2, 6.99, tags, "http://www.freefoodphotos.com/imagelibrary/bread/thumbs/bread.jpg", 12));
-        dishes.add(new Dish(6, "Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg", 13));
-    }
+//    public void addDish(){
+//        dishes = new ArrayList<Dish>();
+//        List<String> tags = new ArrayList<String>();
+//        tags.add("Chinese");
+//        tags.add("Vege");
+//        dishes.add(new Dish(1, "Mini Raspeberry Pavlovas", 4.5f, 3.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/mini_raspeberry_pavlovas.jpg", 11));
+//        dishes.add(new Dish(2, "Cake", 4, 8.99, tags, "http://www.freefoodphotos.com/imagelibrary/cooking/thumbs/cake_making.jpg",12));
+//        dishes.add(new Dish(3, "Strawberries", 3.5f, 4.99, tags, "http://www.freefoodphotos.com/imagelibrary/fruit/thumbs/three_strawberries.jpg", 13));
+//        dishes.add(new Dish(4, "Dessert Merigues", 3, 7.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/dessert_meringues.jpg", 11));
+//        dishes.add(new Dish(5, "Bread", 2, 6.99, tags, "http://www.freefoodphotos.com/imagelibrary/bread/thumbs/bread.jpg", 12));
+//        dishes.add(new Dish(6, "Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg", 13));
+//    }
 
     public void fetchDishesFromServer(){
         DishDAO.findAll(this);

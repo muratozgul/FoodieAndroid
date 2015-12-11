@@ -9,6 +9,8 @@ import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,14 +28,19 @@ import com.squareup.picasso.Target;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.com.example.foodie.foodieandroid.DAO.ChefDAO;
+import app.com.example.foodie.foodieandroid.DAO.DishDAO;
+import app.com.example.foodie.foodieandroid.DAO.IDishCallback;
 import app.com.example.foodie.foodieandroid.Fragments.FragmentChef;
 import app.com.example.foodie.foodieandroid.Model.Chef;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.Model.Review;
 import app.com.example.foodie.foodieandroid.R;
 
-public class DishDetailActivity extends AppCompatActivity {
-    private Dish dish;
+public class DishDetailActivity extends AppCompatActivity implements IDishCallback{
+    private static String TAG = "DISH_DETAIL";
+    private Dish dish = new Dish();
+    private Chef chef = new Chef();
     private ImageView dishImage;
     private TextView dishPrice;
     private RatingBar ratingBar;
@@ -50,12 +57,25 @@ public class DishDetailActivity extends AppCompatActivity {
         int dish_id = dishInent.getIntExtra("dish_id", 1);
 
         // Get Dish Object
-        findDish(dish_id);
+        //findDish(dish_id);
+        fetchDishFromServer(dish_id);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void updateUI(){
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = FragmentChef.newInstance(chef);
+        ft.add(R.id.fragment_container, fragment, "CHEF");
+        ft.commit();
 
         dishImage = (ImageView) findViewById(R.id.dishImage);
         dishPrice = (TextView) findViewById(R.id.dishPrice);
         ratingBar = (RatingBar) findViewById(R.id.dishRating);
         dishTags = (TextView) findViewById(R.id.dishTags);
+
+        Log.e(TAG, "DISH: " + dish.toString());
+        Log.e(TAG, "CHEF: " + chef.toString());
 
         getSupportActionBar().setTitle(dish.getName());
         dishPrice.setText("$" + dish.getPrice());
@@ -66,8 +86,6 @@ public class DishDetailActivity extends AppCompatActivity {
         Picasso.with(this)
                 .load(dishUri)
                 .into(dishImage);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -78,23 +96,52 @@ public class DishDetailActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void findDish(int id){
-        List<Dish> dishes = new ArrayList<Dish>();
-        List<String> tags = new ArrayList<String>();
-        tags.add("Chinese");
-        tags.add("Vege");
-        dishes.add(new Dish(1, "Mini Raspeberry Pavlovas", 4.5f, 3.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/mini_raspeberry_pavlovas.jpg", 11));
-        dishes.add(new Dish(2, "Cake", 4, 8.99, tags, "http://www.freefoodphotos.com/imagelibrary/cooking/thumbs/cake_making.jpg", 12));
-        dishes.add(new Dish(3, "Strawberries", 3.5f, 4.99, tags, "http://www.freefoodphotos.com/imagelibrary/fruit/thumbs/three_strawberries.jpg", 13));
-        dishes.add(new Dish(4, "Dessert Merigues", 3, 7.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/dessert_meringues.jpg", 11));
-        dishes.add(new Dish(5, "Bread", 2, 6.99, tags, "http://www.freefoodphotos.com/imagelibrary/bread/thumbs/bread.jpg", 12));
-        dishes.add(new Dish(6, "Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg", 13));
-
-        //TODO: CHECK EXCEPTION
-        for(int i = 0; i < dishes.size(); i++){
-            if(dishes.get(i).getDish_id() == id){
-                dish = dishes.get(i);
-            }
-        }
+    public void fetchDishFromServer(int id) {
+        DishDAO.findById(id, this);
     }
+    //############################
+    //IChefCallback Interface Methods
+    //############################
+
+    @Override
+    public void findDishByIdCb(Dish dish) {
+        this.dish = dish;
+        this.chef = dish.getChef();
+        updateUI();
+    }
+
+    @Override
+    public void findDishByIdCb(String responseString) {
+
+    }
+
+    @Override
+    public void findAllDishesCb(ArrayList<Dish> dishes) {
+
+    }
+
+    @Override
+    public void findAllDishesCb(String responseString) {
+
+    }
+
+//    public void findDish(int id){
+//        List<Dish> dishes = new ArrayList<Dish>();
+//        List<String> tags = new ArrayList<String>();
+//        tags.add("Chinese");
+//        tags.add("Vege");
+//        dishes.add(new Dish(21, "Mini Raspeberry Pavlovas", 4.5f, 3.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/mini_raspeberry_pavlovas.jpg", 11));
+//        dishes.add(new Dish(22, "Cake", 4, 8.99, tags, "http://www.freefoodphotos.com/imagelibrary/cooking/thumbs/cake_making.jpg", 12));
+//        dishes.add(new Dish(23, "Strawberries", 3.5f, 4.99, tags, "http://www.freefoodphotos.com/imagelibrary/fruit/thumbs/three_strawberries.jpg", 13));
+//        dishes.add(new Dish(24, "Dessert Merigues", 3, 7.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/dessert_meringues.jpg", 11));
+//        dishes.add(new Dish(25, "Bread", 2, 6.99, tags, "http://www.freefoodphotos.com/imagelibrary/bread/thumbs/bread.jpg", 12));
+//        dishes.add(new Dish(26, "Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg", 13));
+//
+//        //TODO: CHECK EXCEPTION
+//        for(int i = 0; i < dishes.size(); i++){
+//            if(dishes.get(i).getDish_id() == id){
+//                dish = dishes.get(i);
+//            }
+//        }
+//    }
 }

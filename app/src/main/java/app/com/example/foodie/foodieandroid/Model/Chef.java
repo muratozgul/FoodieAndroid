@@ -2,6 +2,7 @@ package app.com.example.foodie.foodieandroid.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import app.com.example.foodie.foodieandroid.Utility.Rating;
 /**
  * Created by Jennifer on 11/11/15.
  */
-public class Chef extends User {
+public class Chef extends User implements Serializable {
 
     @SerializedName("score")
     private float rating;
@@ -38,7 +39,6 @@ public class Chef extends User {
     //Constructors
     //############################
 
-
     public Chef(int user_id, String name, String profile_img, float rating, int num_of_dishes, List<String> tags, ArrayList<Dish> dishes) {
         super(user_id, name, profile_img);
         this.rating = rating;
@@ -57,6 +57,11 @@ public class Chef extends User {
         this.rating = rating;
         this.num_of_dishes = num_of_dishes;
         this.tags = tags != null ? tags : new ArrayList<String>();
+    }
+
+    public Chef(int user_id, String name, String profile_img, int num_of_dishes) {
+        super(user_id, name, profile_img);
+        this.num_of_dishes = num_of_dishes;
     }
 
     public Chef(int user_id, String name, String profile_img) {
@@ -113,5 +118,16 @@ public class Chef extends User {
 
     public void setDishes(ArrayList<Dish> dishes) {
         this.dishes = dishes;
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("id: " + getUser_id());
+        sb.append("\nname: " + getName());
+        sb.append("\nrating: " + rating);
+        sb.append("\npic: " + getProfile_img());
+        sb.append("\ndishes served: " + num_of_dishes);
+        sb.append("\ntags:" + tags);
+        return sb.toString();
     }
 }

@@ -83,19 +83,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
         android:orientation="vertical">
 
-        <fragment
-            android:id="@+id/chefFragment"
-            class="app.com.example.foodie.foodieandroid.Fragments.FragmentChef"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <!--<fragment-->
+            <!--android:id="@+id/chefFragment"-->
+            <!--class="app.com.example.foodie.foodieandroid.Fragments.FragmentChef"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
 
-        <fragment
-            android:id="@+id/reviewFragment"
-            class="app.com.example.foodie.foodieandroid.Fragments.FragmentReviews"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <!--<fragment-->
+            <!--android:id="@+id/reviewFragment"-->
+            <!--class="app.com.example.foodie.foodieandroid.Fragments.FragmentReviews"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
 
     </LinearLayout>
 

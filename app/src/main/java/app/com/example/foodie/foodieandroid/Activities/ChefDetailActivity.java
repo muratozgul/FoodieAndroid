@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,12 +28,13 @@ import app.com.example.foodie.foodieandroid.Adapters.DishMenuAdapter;
 import app.com.example.foodie.foodieandroid.DAO.ChefDAO;
 import app.com.example.foodie.foodieandroid.DAO.DishDAO;
 import app.com.example.foodie.foodieandroid.DAO.IChefCallback;
+import app.com.example.foodie.foodieandroid.Fragments.FragmentChef;
 import app.com.example.foodie.foodieandroid.Model.Chef;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.R;
 
 public class ChefDetailActivity extends AppCompatActivity implements IChefCallback {
-
+    private String TAG = "CHEF_DETAIL";
     private Chef chef = new Chef();
     private List<Dish> chefDishes = new ArrayList<Dish>();
     private RecyclerView chefDishRV;
@@ -49,10 +52,8 @@ public class ChefDetailActivity extends AppCompatActivity implements IChefCallba
         int chef_id = dishIntent.getIntExtra("chef_id", 1);
         Log.e("ChefDetaiActivity", "CHEF_ID: " + Integer.toString(chef_id));
 
-        findChef(chef_id);
+        //findChef(chef_id);
         //addDish();
-
-        fetchChefFromServer(chef_id);
 
         chefDishRV = (RecyclerView) findViewById(R.id.chefDishRecycler);
         chefDishRV.setHasFixedSize(true);
@@ -63,8 +64,17 @@ public class ChefDetailActivity extends AppCompatActivity implements IChefCallba
         chefDishAdapter = new DishMenuAdapter(chefDishes);
         chefDishRV.setAdapter(chefDishAdapter);
 
+        fetchChefFromServer(chef_id);
+
         getSupportActionBar().setTitle(chef.getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void updateUI(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = FragmentChef.newInstance(chef);
+        ft.add(R.id.chef_fragment_container, fragment, "CHEF");
+        ft.commit();
     }
 
     public void fetchChefFromServer(int id) {
@@ -80,6 +90,9 @@ public class ChefDetailActivity extends AppCompatActivity implements IChefCallba
         this.chef = chef;
         this.chefDishes = chef.getDishes();
         this.chefDishAdapter.notifyDataSetChanged();
+        updateUI();
+        Log.e(TAG, chef.toString());
+        Log.e(TAG, chefDishes.toString());
     }
 
     @Override
@@ -150,14 +163,14 @@ public class ChefDetailActivity extends AppCompatActivity implements IChefCallba
         }
     }
 
-    public void addDish(){
-        chefDishes = new ArrayList<Dish>();
-        List<String> tags = new ArrayList<String>();
-        tags.add("Chinese");
-        tags.add("Vege");
-        chefDishes.add(new Dish(1, "Mini Raspeberry Pavlovas", 4.5f, 3.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/mini_raspeberry_pavlovas.jpg", 11));
-        chefDishes.add(new Dish(2, "Cake", 4, 8.99, tags, "http://www.freefoodphotos.com/imagelibrary/cooking/thumbs/cake_making.jpg",12));
-        chefDishes.add(new Dish(6, "Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg", 13));
-    }
+//    public void addDish(){
+//        chefDishes = new ArrayList<Dish>();
+//        List<String> tags = new ArrayList<String>();
+//        tags.add("Chinese");
+//        tags.add("Vege");
+//        chefDishes.add(new Dish(1, "Mini Raspeberry Pavlovas", 4.5f, 3.99, tags, "http://www.freefoodphotos.com/imagelibrary/confectionery/thumbs/mini_raspeberry_pavlovas.jpg", 11));
+//        chefDishes.add(new Dish(2, "Cake", 4, 8.99, tags, "http://www.freefoodphotos.com/imagelibrary/cooking/thumbs/cake_making.jpg",12));
+//        chefDishes.add(new Dish(6, "Fresh Salmon", 1, 5.99, tags, "http://www.freefoodphotos.com/imagelibrary/seafood/thumbs/fresh_salmon_snack.jpg", 13));
+//    }
 
 }

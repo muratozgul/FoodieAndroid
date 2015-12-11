@@ -35,7 +35,6 @@ public class DishMenuAdapter extends RecyclerView.Adapter<DishMenuAdapter.DishVi
         public RatingBar dishRating;
         public TextView dishTags;
 
-
         public DishViewHolder(View itemView) {
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.dishCard);

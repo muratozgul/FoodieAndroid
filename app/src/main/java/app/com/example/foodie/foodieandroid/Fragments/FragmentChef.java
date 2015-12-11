@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,9 +21,11 @@ import app.com.example.foodie.foodieandroid.Model.Chef;
 import app.com.example.foodie.foodieandroid.R;
 
 public class FragmentChef extends Fragment {
+    private String TAG = "CHEF_FRAGMENT";
+    private static final String KEY = "chef";
     int dish_id;
     int chef_id;
-    private Chef chef;
+    private Chef chef = new Chef();
     private ImageView chefImg;
     private TextView chefName;
     private TextView chefMealsServed;
@@ -34,6 +36,15 @@ public class FragmentChef extends Fragment {
         // Required empty public constructor
     }
 
+    public static FragmentChef newInstance(Chef chef) {
+        FragmentChef fragment = new FragmentChef();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(KEY, chef);
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -42,6 +53,10 @@ public class FragmentChef extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        chef = (Chef) bundle.getSerializable(KEY);
+
+        Log.e(TAG, chef.toString());
         dish_id = getActivity().getIntent().getIntExtra("dish_id", 23);
         chef_id = getActivity().getIntent().getIntExtra("chef_id", 23);
     }
@@ -54,8 +69,7 @@ public class FragmentChef extends Fragment {
         chefName = (TextView) view.findViewById(R.id.chefName);
         chefMealsServed = (TextView) view.findViewById(R.id.chefMealsServed);
 
-
-        getChef(dish_id);
+        //getChef(dish_id);
 
         Uri imgUri = Uri.parse(chef.getProfile_img());
         Picasso.with(getActivity()).load(imgUri).into(chefImg);
