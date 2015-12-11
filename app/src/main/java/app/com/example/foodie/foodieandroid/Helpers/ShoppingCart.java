@@ -6,9 +6,7 @@ import java.util.Map;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 
-/**
- * Created by Jennifer on 11/11/15.
- */
+
 public class ShoppingCart {
     public static final String TAG = "ShoppingCart";
     private static ShoppingCart singleton;
@@ -37,6 +35,16 @@ public class ShoppingCart {
 
     public Map<Dish, Integer> getContents(){
         return this.contents;
+    }
+
+    // return the number of items in the shopping cart
+    public int size(){
+        int sum = 0;
+
+        for (int val : this.contents.values()) {
+            sum += val;
+        }
+        return sum;
     }
 
     //############################

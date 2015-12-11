@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Jennifer on 11/11/15.
@@ -17,10 +16,10 @@ public class Dish {
     @SerializedName("name")
     private String name;
 
-    @SerializedName("imageUrl")
+    @SerializedName("dishPic")
     private String dish_img;
 
-    @SerializedName("rating")
+    @SerializedName("score")
     private float rating;
 
     @SerializedName("price")

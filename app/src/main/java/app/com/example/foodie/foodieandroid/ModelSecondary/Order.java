@@ -2,7 +2,6 @@ package app.com.example.foodie.foodieandroid.ModelSecondary;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -19,7 +18,7 @@ public class Order implements Parcelable{
     @SerializedName("id")
     private int id;
 
-    @SerializedName("user_id")
+    @SerializedName("userId")
     private int user_id;
 
     @SerializedName("chef_id")
@@ -28,7 +27,7 @@ public class Order implements Parcelable{
     @SerializedName("createdAt")
     private String time_stamp;
 
-    @SerializedName("orderItems")
+    @SerializedName("items")
     private ArrayList<OrderItem> orderItems;
 
     @SerializedName("price")

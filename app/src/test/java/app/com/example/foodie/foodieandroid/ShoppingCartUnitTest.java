@@ -138,4 +138,15 @@ public class ShoppingCartUnitTest {
 
         assertEquals(2, order.getOrderItems().size());
     }
+
+    @Test
+    public void shouldReturnCorrectSize() throws Exception {
+        assertEquals(0, cart.size());
+
+        cart.addOne(dish1);
+        cart.addOne(dish1);
+        cart.addOne(dish2);
+
+        assertEquals(3, cart.size());
+    }
 }
