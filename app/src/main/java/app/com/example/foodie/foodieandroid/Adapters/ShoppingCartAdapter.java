@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import app.com.example.foodie.foodieandroid.Activities.CheckoutActivity;
+import app.com.example.foodie.foodieandroid.Application.FoodieApp;
 import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 import app.com.example.foodie.foodieandroid.R;
 
@@ -51,7 +53,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             imageView = (ImageView) itemView.findViewById(R.id.orderItemCard_image);
             ratingBar = (RatingBar) itemView.findViewById(R.id.orderItemCard_ratingBar);
             removeButton = (Button) itemView.findViewById(R.id.orderItemCard_commentButton);
-
             removeButton.setOnClickListener(this);
             //ratingBar.setOnClickListener(this);
         }
@@ -87,7 +88,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ShoppingCartAdapter.CartItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ShoppingCartAdapter.CartItemViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         //don't need final if not making a toast
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_order_item, parent, false);
 
@@ -98,8 +99,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                                 Toast.LENGTH_SHORT).show();
                     }
                     public void onRemoveButtonClick(Button callerButton, int position) {
-                        Toast.makeText(view.getContext(), "Comment Button Clicked " + Integer.toString(position),
-                                Toast.LENGTH_SHORT).show();
+                        FoodieApp.getCart().removeOne(orderItems.get(position).getDishObject());
+                        ((CheckoutActivity) context).refreshSummary();
+                        ((CheckoutActivity) context).rePopulateAdapter();
                     }
                 });
 
@@ -111,9 +113,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public void onBindViewHolder(CartItemViewHolder civh, int position) {
         OrderItem oi = orderItems.get(position);
 
-        civh.removeButton.setText("Remove");
-
-        String quantity = Integer.toString(oi.getQuantity()) + "x";
+        civh.removeButton.setText("Remove one");
+        String quantity = Integer.toString(oi.getQuantity()) + " x";
         civh.quantityView.setText(quantity);
         civh.nameView.setText(oi.getDishObject().getName());
         civh.priceView.setText("$"+Double.toString(oi.getDishObject().getPrice()*oi.getQuantity()));

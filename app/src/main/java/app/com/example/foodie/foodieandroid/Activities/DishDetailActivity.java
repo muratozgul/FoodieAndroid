@@ -160,4 +160,9 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
     public void findAllDishesCb(String responseString) {
 
     }
+
+    @Override
+    public void findDishesByCategory(ArrayList<Dish> dishes) {
+
+    }
 }

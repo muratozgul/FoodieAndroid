@@ -184,6 +184,7 @@ public class HomeActivity extends AppCompatActivity implements
                 break;
             case R.id.dish_list:
                 Intent dishMenuActivity = new Intent(this, DishMenuActivity.class);
+                dishMenuActivity.putExtra("source", "menu");
                 startActivity(dishMenuActivity);
                 break;
             case R.id.categories:

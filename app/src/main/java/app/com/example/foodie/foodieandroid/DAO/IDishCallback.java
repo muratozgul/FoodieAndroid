@@ -14,4 +14,6 @@ public interface IDishCallback {
 
     public void findAllDishesCb(ArrayList<Dish> dishes);
     public void findAllDishesCb(String responseString);
+
+    public void findDishesByCategory(ArrayList<Dish> dishes);
 }
