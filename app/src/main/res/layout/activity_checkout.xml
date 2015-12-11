@@ -62,6 +62,14 @@
             android:id="@+id/cartTotalCost"
             android:layout_centerVertical="true"
             android:layout_below="@+id/cartItemCount" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Shake to clear cart"
+            android:id="@+id/textView"
+            android:layout_below="@+id/cartTotalCost" />
     </RelativeLayout>
 
 </RelativeLayout>

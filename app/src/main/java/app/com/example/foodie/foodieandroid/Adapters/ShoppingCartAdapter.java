@@ -12,9 +12,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
-import app.com.example.foodie.foodieandroid.Helpers.ShoppingCart;
 import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 import app.com.example.foodie.foodieandroid.R;
 
@@ -52,7 +53,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             removeButton = (Button) itemView.findViewById(R.id.orderItemCard_commentButton);
 
             removeButton.setOnClickListener(this);
-            ratingBar.setOnClickListener(this);
+            //ratingBar.setOnClickListener(this);
         }
 
         @Override
@@ -74,6 +75,14 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public ShoppingCartAdapter(List<OrderItem> orderItems, Context context) {
         this.orderItems = orderItems;
         this.context = context;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     // Create new views (invoked by the layout manager)
@@ -102,13 +111,15 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public void onBindViewHolder(CartItemViewHolder civh, int position) {
         OrderItem oi = orderItems.get(position);
 
-        String quantity = Integer.toString(oi.getQuantity()) + "x";
         civh.removeButton.setText("Remove");
-        civh.quantityView.setText(quantity);
-        civh.nameView.setText(Integer.toString(oi.getDish_id()));
-        civh.priceView.setText("$"+Double.toString(oi.getTotalPrice()));
 
-        civh.ratingBar.setRating(3);
+        String quantity = Integer.toString(oi.getQuantity()) + "x";
+        civh.quantityView.setText(quantity);
+        civh.nameView.setText(oi.getDishObject().getName());
+        civh.priceView.setText("$"+Double.toString(oi.getDishObject().getPrice()*oi.getQuantity()));
+        civh.ratingBar.setRating(oi.getDishObject().getRating());
+
+        Picasso.with(context).load(oi.getDishObject().getDish_img()).into(civh.imageView);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

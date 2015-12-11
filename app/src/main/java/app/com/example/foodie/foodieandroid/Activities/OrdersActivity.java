@@ -20,7 +20,6 @@ import app.com.example.foodie.foodieandroid.Adapters.OrderAdapter;
 import app.com.example.foodie.foodieandroid.DAO.IOrderCallback;
 import app.com.example.foodie.foodieandroid.DAO.OrderDAO;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
-import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 import app.com.example.foodie.foodieandroid.R;
 
 public class OrdersActivity extends AppCompatActivity implements IOrderCallback {

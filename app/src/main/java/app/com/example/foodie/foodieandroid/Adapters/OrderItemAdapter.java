@@ -13,6 +13,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,11 +108,11 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
         String quantity = Integer.toString(oi.getQuantity()) + "x";
 
         oivh.quantityView.setText(quantity);
-        oivh.nameView.setText(Integer.toString(oi.getDish_id()));
-        oivh.priceView.setText("$"+Double.toString(oi.getTotalPrice()));
+        oivh.nameView.setText(oi.getDishObject().getName());
+        oivh.priceView.setText("$"+Double.toString(oi.getDishObject().getPrice()*oi.getQuantity()));
+        oivh.ratingBar.setRating(oi.getDishObject().getRating());
 
-        oivh.ratingBar.setRating(3);
-
+        Picasso.with(context).load(oi.getDishObject().getDish_img()).into(oivh.imageView);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

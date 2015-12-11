@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     private static final String TAG = "OrderAdapter";
     private List<Order> orders;
     private Context context;
+    private NumberFormat formatter = new DecimalFormat("#0.00");
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CardView orderCardView;
@@ -111,8 +114,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         orderViewHolder.orderIdView.setText("Order#: "+ Integer.toString(order.getId()));
         orderViewHolder.orderDateView.setText(order.getOrderDateString());
-        orderViewHolder.orderContentsView.setText("Order Contents");
-        orderViewHolder.orderPriceView.setText("Total price: " + Double.toString(order.getTotal_price()));
+        orderViewHolder.orderContentsView.setText(order.generateContentsString());
+
+        orderViewHolder.orderPriceView.setText("Total price: $" + formatter.format(order.calculatePrice()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

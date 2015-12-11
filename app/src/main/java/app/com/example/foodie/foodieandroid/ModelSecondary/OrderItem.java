@@ -39,6 +39,14 @@ public class OrderItem implements Parcelable {
         this.dishObject = null;
     }
 
+    public OrderItem(int id, int orderId, int dish_id, int quantity, Dish dish) {
+        this.id = id;
+        this.order_id = orderId;
+        this.dish_id = dish_id;
+        this.quantity = quantity;
+        this.dishObject = dish;
+    }
+
     public OrderItem(int dish_id, int quantity, double totalPrice) {
         this.dish_id = dish_id;
         this.quantity = quantity;
@@ -51,6 +59,9 @@ public class OrderItem implements Parcelable {
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.dishObject = dish;
+    }
+
+    public OrderItem(){
     }
 
     //############################
@@ -97,6 +108,16 @@ public class OrderItem implements Parcelable {
         this.totalPrice = totalPrice;
     }
 
+    public Dish getDishObject() {
+        return dishObject;
+    }
+
+    public void setDishObject(Dish dishObject) {
+        this.dishObject = dishObject;
+    }
+
+
+
     //############################
     //Parcelable Interface Methods
     //############################
@@ -114,6 +135,7 @@ public class OrderItem implements Parcelable {
         out.writeInt(order_id);
         out.writeInt(dish_id);
         out.writeInt(quantity);
+        out.writeParcelable(dishObject, flags);
     }
 
     // This is used to regenerate orderItem object.
@@ -135,6 +157,7 @@ public class OrderItem implements Parcelable {
         this.order_id = in.readInt();
         this.dish_id = in.readInt();
         this.quantity = in.readInt();
+        this.dishObject = in.readParcelable(Dish.class.getClassLoader());
     }
 
     //############################
@@ -160,5 +183,9 @@ public class OrderItem implements Parcelable {
         result += ", orderId: " + Integer.toString(this.order_id);
         result += ", quantity: " + Integer.toString(this.quantity);
         return result;
+    }
+
+    public double calculatePrice(){
+        return this.quantity * this.dishObject.getPrice();
     }
 }

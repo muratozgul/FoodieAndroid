@@ -43,7 +43,7 @@ public class DishMenuActivity extends AppCompatActivity implements IDishCallback
         dishMenuRV.setHasFixedSize(true);
         dishMenuLayoutManager = new LinearLayoutManager(this);
         dishMenuRV.setLayoutManager(dishMenuLayoutManager);
-        dishMenuAdapter = new DishMenuAdapter(dishes);
+        dishMenuAdapter = new DishMenuAdapter(dishes, this);
         dishMenuRV.setAdapter(dishMenuAdapter);
 
         fetchDishesFromServer();

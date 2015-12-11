@@ -24,8 +24,11 @@ public class OrderUnitTest {
     @BeforeClass
     public static void initialize() {
         //System.out.println("@BeforeClass: initializing...");
-        dish1 = new Dish(1, "dish1", 2d);
-        dish2 = new Dish(2, "dish2", 3d);
+        //dish1 = new Dish(1, "dish1", 2d);
+        //dish2 = new Dish(2, "dish2", 3d);
+
+        dish1 = new Dish(1, "dish1", 5f, 2d, "", null);
+        dish2 = new Dish(2, "dish2", 4f, 3d, "", null);
     }
 
     @Before
