@@ -9,11 +9,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.cmu.yufeis.learnwireframe.Login">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/Welcome"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/foodies" />
+
     <EditText
         android:id="@+id/username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_below="@id/Welcome"
         android:layout_marginTop="20px"
         android:hint="Email Address" />
 
@@ -32,8 +41,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50px"
-        android:text="Sign In" />
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="40px"
+        android:text="Login" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/google_sign_in_button"

@@ -85,7 +85,7 @@ public class OrdersActivity extends AppCompatActivity implements IOrderCallback 
         //setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //in manifest file -> set android:parentActivityName
-
+        getSupportActionBar().setTitle("Order History");
 
         ordersRecyclerView = (RecyclerView) findViewById(R.id.ordersRecyclerView);
         //enable optimizations if all item views are
