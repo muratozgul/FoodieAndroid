@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -23,85 +22,76 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:adjustViewBounds="true"
+        android:orientation="horizontal"
         android:paddingTop="6dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="150dp">
+            android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/chef_list"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:id="@+id/chef_list"
-                android:adjustViewBounds="true"
                 android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
                 android:src="@drawable/contentchef" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Chef's Corner"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="50dp"
-                android:textSize="20dp"
-                android:textColor="@color/colorPrimaryText"/>
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20dp" />
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
                 android:text="See what they are cooking"
                 android:textAlignment="center"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/colorSecondaryText"/>
+                android:textColor="@color/colorSecondaryText" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="150dp">
+            <ImageView
+                android:id="@+id/dish_list"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/contentdish" />
 
-                <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:adjustViewBounds="true"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/dish_list"
-                    android:src="@drawable/contentdish" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Dish Menu"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dish Menu"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="50dp"
-                    android:textSize="20dp"
-                    android:textColor="@color/colorPrimaryText"/>
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="See what dishes are available"
+                android:textAlignment="center"
+                android:textColor="@color/colorSecondaryText" />
 
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:text="See what dishes are available"
-                    android:textAlignment="center"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@color/colorSecondaryText"/>
-
-            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -110,84 +100,72 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="150dp">
+            android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/categories"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/categories"
                 android:src="@drawable/contentmenu" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Categories"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="50dp"
-                android:textSize="20dp"
-                android:textColor="@color/colorPrimaryText"/>
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20dp" />
 
             <TextView
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Choose food category by your preference"
                 android:textAlignment="center"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/colorSecondaryText"/>
-
-        </RelativeLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="150dp">
-
-                <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:adjustViewBounds="true"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/location_map"
-                    android:src="@drawable/contentlocation" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Location Map"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="50dp"
-                    android:textSize="20dp"
-                    android:textColor="@color/colorPrimaryText"/>
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="See where are the dishes"
-                    android:textAlignment="center"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@color/colorSecondaryText"/>
-
-            </RelativeLayout>
-
+                android:textColor="@color/colorSecondaryText" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/location_map"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/contentlocation" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Location Map"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="See where are the dishes"
+                android:textAlignment="center"
+                android:textColor="@color/colorSecondaryText" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
+
 </LinearLayout>

@@ -41,9 +41,7 @@ public class DishMenuAdapter extends RecyclerView.Adapter<DishMenuAdapter.DishVi
         public TextView dishPrice;
         public RatingBar dishRating;
         public TextView dishTags;
-
         public Button addButton;
-
         public IDishViewHolderClicks mListener;
 
         public DishViewHolder(View itemView, IDishViewHolderClicks listener) {
@@ -106,9 +104,9 @@ public class DishMenuAdapter extends RecyclerView.Adapter<DishMenuAdapter.DishVi
                     }
 
                     public void onImageClick(ImageView imageView, int position) {
-                        Intent detailIntent = new Intent(context, DishDetailActivity.class);
+                        Intent detailIntent = new Intent(view.getContext(), DishDetailActivity.class);
                         detailIntent.putExtra("dish_id", dishes.get(position).getDish_id());
-                        context.startActivity(detailIntent);
+                        view.getContext().startActivity(detailIntent);
                     }
                 });
 
@@ -121,21 +119,10 @@ public class DishMenuAdapter extends RecyclerView.Adapter<DishMenuAdapter.DishVi
         Context context = dishViewHolder.dishImage.getContext();
         Uri dishUri = Uri.parse(dishes.get(position).getDishImage());
         Picasso.with(context).load(dishUri).into(dishViewHolder.dishImage);
-
         dishViewHolder.dishName.setText(dishes.get(position).getName());
         dishViewHolder.dishPrice.setText("$" + Double.toString(dishes.get(position).getPrice()));
         dishViewHolder.dishRating.setRating(dishes.get(position).getRating());
         dishViewHolder.dishTags.setText(dishes.get(position).getTags());
-
-//        dishViewHolder.cv.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//                Intent detailIntent = new Intent(view.getContext(), DishDetailActivity.class);
-//                detailIntent.putExtra("dish_id", dishes.get(position).getDish_id());
-//                view.getContext().startActivity(detailIntent);
-//            }
-//        });
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -19,9 +19,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -49,6 +51,8 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
     private RatingBar ratingBar;
     private TextView dishTags;
     private TextView checkoutButton;
+    private Button buyButton;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,7 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
 
         Intent dishInent = getIntent();
         int dish_id = dishInent.getIntExtra("dish_id", 1);
-
+        context = this;
         // Get Dish Object
         //findDish(dish_id);
         fetchDishFromServer(dish_id);
@@ -73,6 +77,17 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
         dishPrice = (TextView) findViewById(R.id.dishPrice);
         ratingBar = (RatingBar) findViewById(R.id.dishRating);
         dishTags = (TextView) findViewById(R.id.dishTags);
+        buyButton = (Button) findViewById(R.id.buyButton);
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FoodieApp.getInstance().getCart().addOne(dish);
+                checkoutButton.setText(Integer.toString(FoodieApp.getInstance().getCart().size()));
+                Toast.makeText(context, dish.getName() + " added to cart",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
         dishPrice.setText("$" + dish.getPrice());
         dishTags.setText(dish.getTags());
         ratingBar.setRating(dish.getRating());
@@ -97,17 +112,18 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_checkout, menu);
 
-        final View checkout = menu.findItem(R.id.checkout).getActionView();
+        View checkout = menu.findItem(R.id.checkout).getActionView();
         checkoutButton = (TextView) checkout.findViewById(R.id.cart_qty);
 
-        checkoutButton.setOnClickListener(new View.OnClickListener() {
+        int cartSize = FoodieApp.getInstance().getCart().size();
+        checkoutButton.setText(Integer.toString(cartSize));
+
+        checkout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(checkout.getContext(), CheckoutActivity.class);
-                checkout.getContext().startActivity(intent);
-                int cartSize = FoodieApp.getInstance().getCart().size();
-                checkoutButton.setText(Integer.toString(cartSize));
+                Intent intent = new Intent(context, CheckoutActivity.class);
+                context.startActivity(intent);
             }
         });
 
@@ -165,4 +181,5 @@ public class DishDetailActivity extends AppCompatActivity implements IDishCallba
     public void findDishesByCategory(ArrayList<Dish> dishes) {
 
     }
+
 }

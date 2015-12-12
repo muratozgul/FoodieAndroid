@@ -23,7 +23,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/chefDishRecycler"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="240dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
