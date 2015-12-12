@@ -56,6 +56,13 @@ public class Review implements Serializable {
         this.customer = customer;
     }
 
+    public Review(float rating, String text, int customer_id, int dish_id){
+        this.star_rating = rating;
+        this.review_text = text;
+        this.customer_id = customer_id;
+        this.dish_id = dish_id;
+    }
+
     public Review(Customer customer) {
         this.customer = customer;
     }
