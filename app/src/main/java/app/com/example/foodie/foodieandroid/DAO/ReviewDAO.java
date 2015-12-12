@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
@@ -20,6 +21,8 @@ import java.util.List;
 import app.com.example.foodie.foodieandroid.Application.FoodieApp;
 import app.com.example.foodie.foodieandroid.Model.Dish;
 import app.com.example.foodie.foodieandroid.Model.Review;
+import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
+import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 
 /**
  * Created by Jennifer on 12/10/15.
@@ -27,8 +30,21 @@ import app.com.example.foodie.foodieandroid.Model.Review;
 public class ReviewDAO {
     private static final String TAG = "ReviewDAO";
     private static String restApiBaseUrl = FoodieApp.getApiUrl();
+    private static String baseReviewUrl = "/reviews";
     private static String dishReviewUrl = "/reviews/dishes";
     private static String chefReviewUrl = "/reviews/chefs";
+
+    //############################
+    //URL building methods
+    //############################
+
+    public static String postReviewUrl(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(restApiBaseUrl);
+        sb.append(baseReviewUrl);
+        return sb.toString();
+    }
+
 
     //############################
     //API GET methods
@@ -70,6 +86,48 @@ public class ReviewDAO {
 
         // Add request to (global) request queue
         FoodieApp.getInstance().addToRequestQueue(jsonArrReq, TAG);
+    }
+
+    //############################
+    //API POST methods
+    //############################
+
+    public static void create(Review review, final IReviewCallback cbInterface) throws JSONException {
+        // Build url
+        String url = postReviewUrl();
+
+        // Build req
+        JSONObject jsReview = new JSONObject();
+        jsReview.put("starRating", review.getStar_rating());
+        jsReview.put("reviewText", review.getReview_text());
+        jsReview.put("dishId", review.getDish_id());
+        jsReview.put("customerId", FoodieApp.getAppUserId());
+
+        // Create new response listener
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, "Order created");
+                Log.d(TAG, response.toString());
+                cbInterface.createReviewCb(response.toString());
+            }
+        };
+
+        // Create new response error listener
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "Order create Error: " + error.getMessage());
+            }
+        };
+
+        // Make POST request
+        JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, jsReview, responseListener, errorListener);
+        Log.d(TAG, "Json sent:");
+        Log.d(TAG, jsReview.toString());
+
+        // Add request to (global) request queue
+        FoodieApp.getInstance().addToRequestQueue(jsonObjRequest, TAG);
     }
 
     //############################

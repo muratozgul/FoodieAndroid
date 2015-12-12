@@ -206,7 +206,7 @@ public class OrderDAO {
 
     public static void create(Order order, final IOrderCallback cbInterface) throws JSONException {
         // Build url
-        String url = getOrdersUrl();
+        String url = postOrderUrl();
 
         // Build req
         ArrayList<OrderItem> orderItems = order.getOrderItems();

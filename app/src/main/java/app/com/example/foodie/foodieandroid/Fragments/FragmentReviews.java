@@ -88,4 +88,9 @@ public class FragmentReviews extends Fragment implements IReviewCallback {
         this.reviewAdapter.notifyDataSetChanged();
         Log.e("REVIEWS: ", reviews.toString());
     }
+
+    @Override
+    public void createReviewCb(String responseString) {
+        //ignore
+    }
 }
