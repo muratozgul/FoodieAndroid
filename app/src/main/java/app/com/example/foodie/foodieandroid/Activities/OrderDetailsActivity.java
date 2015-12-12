@@ -6,16 +6,19 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Adapters.OrderItemAdapter;
+import app.com.example.foodie.foodieandroid.DAO.IReviewCallback;
+import app.com.example.foodie.foodieandroid.Model.Review;
 import app.com.example.foodie.foodieandroid.ModelSecondary.Order;
 import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 import app.com.example.foodie.foodieandroid.R;
 
-public class OrderDetailsActivity extends AppCompatActivity {
+public class OrderDetailsActivity extends AppCompatActivity implements IReviewCallback {
     private static final String TAG = "OrderDetailsActivity";
     private RecyclerView orderItemsRecyclerView;
     private RecyclerView.Adapter orderItemsAdapter;
@@ -63,5 +66,19 @@ public class OrderDetailsActivity extends AppCompatActivity {
         orderItems.add(new OrderItem(2, this.orderId, 5, 1));
 
         return orderItems;
+    }
+
+    //############################
+    //IReviewCallback Interface Methods
+    //############################
+
+    @Override
+    public void findReviewsByDishIdCb(ArrayList<Review> reviews) {
+        //ignore
+    }
+
+    @Override
+    public void createReviewCb(String responseString) {
+        Toast.makeText(this, "Review Created", Toast.LENGTH_SHORT);
     }
 }

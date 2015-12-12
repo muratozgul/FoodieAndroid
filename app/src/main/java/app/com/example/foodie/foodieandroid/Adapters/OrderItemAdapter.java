@@ -18,11 +18,18 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import app.com.example.foodie.foodieandroid.Activities.OrderDetailsActivity;
+import app.com.example.foodie.foodieandroid.Application.FoodieApp;
+import app.com.example.foodie.foodieandroid.DAO.ReviewDAO;
+import app.com.example.foodie.foodieandroid.Model.Review;
 import app.com.example.foodie.foodieandroid.ModelSecondary.OrderItem;
 import app.com.example.foodie.foodieandroid.R;
+import app.com.example.foodie.foodieandroid.Utility.Rating;
 
 /**
  * Created by muratozgul on 05/12/15.
@@ -97,7 +104,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
                     public void onCommentButtonClick(Button callerButton, int position) {
                         Toast.makeText(view.getContext(), "Comment Button Clicked " + Integer.toString(position),
                                 Toast.LENGTH_SHORT).show();
-                        showReviewDialog();
+                        showReviewDialog(position);
                     }
                 });
 
@@ -125,7 +132,11 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
         return this.orderItems.size();
     }
 
-    protected void showReviewDialog() {
+    public OrderItem getOrderItem(int position){
+        return this.orderItems.get(position);
+    }
+
+    protected void showReviewDialog(final int position) {
 
         // get prompts.xml view
         LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -135,11 +146,15 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
 
         final RatingBar ratingBar = (RatingBar) promptView.findViewById(R.id.reviewRating);
         final EditText editText = (EditText) promptView.findViewById(R.id.reviewTextEdit);
+
         // setup a dialog window
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(context, "Review you left: \n" + ratingBar.getRating() + " stars\n" + editText.getText().toString(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(context, "Review you left: \n" + ratingBar.getRating() + " stars\n" + editText.getText().toString(), Toast.LENGTH_LONG).show();
+                        Review review = new Review(ratingBar.getRating(), editText.getText().toString(),
+                                FoodieApp.getAppUserId(), getOrderItem(position).getDish_id());
+                        postReview(review);
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -152,5 +167,13 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
         // create an alert dialog
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
+    }
+
+    protected void postReview(Review review){
+        try {
+            ReviewDAO.create(review, (OrderDetailsActivity)this.context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
