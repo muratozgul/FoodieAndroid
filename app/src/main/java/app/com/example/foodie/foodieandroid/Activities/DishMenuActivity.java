@@ -108,7 +108,7 @@ public class DishMenuActivity extends AppCompatActivity implements IDishCallback
         int cartSize = FoodieApp.getInstance().getCart().size();
         checkoutButton.setText(Integer.toString(cartSize));
 
-        checkoutButton.setOnClickListener(new View.OnClickListener() {
+        checkout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

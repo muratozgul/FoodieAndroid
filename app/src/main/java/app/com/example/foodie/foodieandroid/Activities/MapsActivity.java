@@ -1,9 +1,14 @@
 package app.com.example.foodie.foodieandroid.Activities;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,15 +23,24 @@ import java.util.List;
 
 import app.com.example.foodie.foodieandroid.R;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
+    private String TAG = "LOCATION_MAP";
     private GoogleMap mMap;
     private List<Marker> markers;
-    private int[] id ;
+    private int[] id;
+    private GoogleApiClient mGoogleApiClient;
+    private LatLng me;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -43,10 +57,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onInfoWindowClick(Marker marker) {
 
-                for (int i = 0; i < markers.size(); i ++) {
+                for (int i = 0; i < markers.size(); i++) {
                     Marker m = markers.get(i);
                     if (marker.getTitle() != null && marker.getTitle().equals(m.getTitle())) {
-
                         Intent intent = new Intent(MapsActivity.this, ChefDetailActivity.class);
                         intent.putExtra("chef_id", id[i]);
                         startActivity(intent);
@@ -55,9 +68,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
-
-        LatLng me = new LatLng(37.3861111, -122.0827778);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(me, 12.0f));
 
         // Add a marker in Sydney and move the camera
         LatLng mtv1 = new LatLng(37.4095839, -122.0553239);
@@ -81,4 +91,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(me));
     }
 
+    @Override
+    public void onConnected(Bundle bundle) {
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (location == null) {
+            Log.i(TAG, "Looks like location is not able to get.");
+            LatLng me = new LatLng(37.3861111, -122.0827778);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(me, 12.0f));
+        } else {
+            me = new LatLng(location.getLatitude(), location.getLongitude());
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(me, 12.0f));
+            mMap.addMarker(new MarkerOptions().position(me).title("You're here!").
+                    icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            Log.i(TAG, "LOCATION GOT SUCCESSFUL!");
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.i(TAG, "Location services suspended. Please reconnect.");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
+    }
 }

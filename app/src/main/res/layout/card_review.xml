@@ -22,6 +22,7 @@
                 android:layout_width="@dimen/thumbnail_width"
                 android:layout_height="@dimen/thumbnail_height"
                 android:layout_marginLeft="10dp"
+                android:padding="10dp"
                 android:src="@drawable/foodie" />
 
             <TextView

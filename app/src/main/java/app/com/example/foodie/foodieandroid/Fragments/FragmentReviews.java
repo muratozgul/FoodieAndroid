@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.com.example.foodie.foodieandroid.Adapters.ReviewAdapter;
-import app.com.example.foodie.foodieandroid.DAO.DishDAO;
 import app.com.example.foodie.foodieandroid.DAO.IReviewCallback;
 import app.com.example.foodie.foodieandroid.DAO.ReviewDAO;
 import app.com.example.foodie.foodieandroid.Model.Review;
@@ -58,7 +57,7 @@ public class FragmentReviews extends Fragment implements IReviewCallback {
         reviewRV = (RecyclerView) view.findViewById(R.id.reviewRecycler);
         reviewRV.setHasFixedSize(false);
         reviewRV.setNestedScrollingEnabled(false);
-        reviewRV.setMinimumHeight(1500);
+        reviewRV.setMinimumHeight(1000);
         reviewRV.setFocusable(false);
 
         reviewManager = new LinearLayoutManager(view.getContext());

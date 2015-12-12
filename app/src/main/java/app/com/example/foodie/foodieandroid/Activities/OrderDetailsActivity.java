@@ -41,7 +41,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements IReviewCa
         //setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //in manifest file -> set android:parentActivityName
-
+        getSupportActionBar().setTitle("Order Detail");
         orderItemsRecyclerView = (RecyclerView) findViewById(R.id.ordersItemsRecyclerView);
         //enable optimizations if all item views are
         //of the same height and width for significantly smoother scrolling
